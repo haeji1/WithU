@@ -97,5 +97,4 @@
   height: 80vh !important;
   /* width: 80% !important; */
 }
-
 </style>

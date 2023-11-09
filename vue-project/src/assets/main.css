@@ -19,9 +19,8 @@ footer .company-info{
 
   .card {
     transition: transform 0.2s; /* 확대 효과에 대한 트랜지션 설정 */
-
-
   }
+  /* 두 줄만 표시하도록 한다. */
   .card-text {
     overflow: hidden;
     text-overflow: ellipsis;
