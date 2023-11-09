@@ -3,12 +3,15 @@ import Heading from "../components/common/Heading.vue";
 </script>
 
 <template>
-    <header>
-    <Heading></Heading>
-</header>
+    <div>
+        <header>
+            <Heading>
+
+            </Heading>
+        </header>
     <div>
         
-    </div>
+    </div></div>
 </template>
 
 <style scoped>
