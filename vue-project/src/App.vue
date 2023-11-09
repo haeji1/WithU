@@ -1,12 +1,15 @@
 <script setup>
-import IndexView from "./views/IndexView.vue";
+// import IndexView from "./views/IndexView.vue";
+import BoardList from "./views/BoardList.vue";
 </script>
 
 <template>
-  <index-view></index-view>
+<div>
+  <!-- <index-view></index-view> -->
+  <BoardList></BoardList>
   <div>
-    aaaa
   </div>
+</div>
 </template>
 
 <style scoped>
