@@ -50,7 +50,4 @@
     display: block;
     margin-top: 0;
 }
-.dropdown-item{
-    
-}
 </style>
