@@ -1,0 +1,12 @@
+footer{
+    background-color: antiquewhite;
+}
+footer .img-ssafy-logo{
+    height: 100px;
+}
+footer .img-link{
+    height: 60px;
+}
+footer .company-info{
+    color: #888;
+}
