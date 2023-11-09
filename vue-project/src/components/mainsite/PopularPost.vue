@@ -1,32 +1,23 @@
-<!-- <script setup>
-        // <script>
-        //   function redirectToLink(link) {
-        //     window.location.href = link; // 클릭한 카드에 설정된 링크로 이동합니다.
-        //   }
-        // </script>
-
-
-</script> -->
 <script setup>
-import LocationSiteItem from './LocationSiteItem.vue';
+import PopularPostItem from './PopularPostItem.vue';
+
+
 </script>
+
 <template>
     <section>
         <div id = "Ourlocation" style="padding-top: 2%;">
-          <span style="font-size: 20px;margin-left: 1%">우리 지역의</span>
-          <br>
-          <span style="font-size: 18px; margin-left: 1%">추천 관광지.</span>
+          <span style="font-size: 20px;margin-left: 1%">인기글</span>
           <br>
           <a class="btn btn-primary" href="#" role="button" style="font-size: 15px; margin-left: 1%; margin-top: 1%;">더보기</a>
         </div>
         <br />
         <div class="container-fluid">
           <div class="row">
-            <LocationSiteItem></LocationSiteItem>
+            <PopularPostItem></PopularPostItem>
           </div>
         </div>
       </section>
-
 </template>
 
 <style scoped>
@@ -38,4 +29,5 @@ import LocationSiteItem from './LocationSiteItem.vue';
     background-color: thistle;
     padding-bottom: 1%;
   }
+  
 </style>
