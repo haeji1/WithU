@@ -2,7 +2,7 @@
 
 <template>
     <footer>
-        <div class="section-content p-4 mt-3 container-fluid">
+        <div class="section-content p-4 mt-3 container">
       <div class="row">
         <div class="mb-4 text-center col-2">
           <img
