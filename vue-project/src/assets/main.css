@@ -16,3 +16,28 @@ footer .company-info{
     margin-bottom: 3rem;
     border-top: 2px solid #fff;
   }
+
+  .card {
+    transition: transform 0.2s; /* 확대 효과에 대한 트랜지션 설정 */
+
+
+  }
+  .card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 두 줄만 표시하도록 설정 */
+    -webkit-box-orient: vertical;
+}
+
+  .card:hover {
+    transform: scale(1.1); /* 카드 확대 효과 */
+    cursor: pointer;
+  }
+  
+  
+  .card-img-top {
+    height: 250px; /* 이미지 높이를 조절 */
+    object-fit: cover; /* 이미지 비율 유지 및 크롭 */
+  }
+  
