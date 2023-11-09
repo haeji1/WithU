@@ -5,7 +5,7 @@ import IndexView from "./views/IndexView.vue";
 <template>
   <index-view></index-view>
   <div>
-    
+    aaaa
   </div>
 </template>
 
