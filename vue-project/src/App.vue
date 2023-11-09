@@ -1,13 +1,14 @@
 <script setup>
-import IndexView from "./views/IndexView.vue";
+import Heading from "./components/common/Heading.vue";
 import BoardList from "./views/BoardList.vue";
+import IndexView from "./views/IndexView.vue";
 </script>
 
 <template>
 <div>
-  <index-view></index-view>
-  <BoardList></BoardList>
+  <Heading></Heading>
   <div>
+    <IndexView></IndexView>
   </div>
 </div>
 </template>
