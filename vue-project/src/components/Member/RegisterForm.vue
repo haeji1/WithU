@@ -42,8 +42,4 @@
   display: inline-block;
   margin-top: 10px;
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 28aabc84c7404aff65b610b54f5c674fd3ab9636
