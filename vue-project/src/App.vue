@@ -2,7 +2,7 @@
 import Heading from "./components/common/Heading.vue";
 import BoardList from "./components/Board/BoardList.vue";
 // import IndexView from "./views/IndexView.vue";
-// import RegisterForm from "./components/Member/RegisterForm.vue";
+import RegisterForm from "./components/Member/RegisterForm.vue";
 
 </script>
 
@@ -11,8 +11,8 @@ import BoardList from "./components/Board/BoardList.vue";
   <Heading></Heading>
   <div>
     <!-- <IndexView></IndexView> -->
-    <!-- <RegisterForm></RegisterForm> -->
-    <BoardList></BoardList>
+    <RegisterForm></RegisterForm>
+    <!-- <BoardList></BoardList> -->
   </div>
 </div>
 </template>
