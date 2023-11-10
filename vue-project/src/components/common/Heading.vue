@@ -8,7 +8,9 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
           <!-- <div class="container"> -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <router-link :to="{ name: 'index' }" class="navbar-brand">NavBar</router-link>
+    <!-- <a>Navbar</a> -->
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,8 +25,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">공지사항</a></li>
-            <li><a class="dropdown-item" href="#">게시판</a></li>
-          </ul>
+              <!-- <li><a class="dropdown-item">게시판</a></li> -->
+              <li><a href="/board" router-link to="{ name: 'board' }" class="dropdown-item">게시판</a></li>
+            </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">여행계획</a>
@@ -36,7 +39,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">로그인</a></li>
             <li><a class="dropdown-item" href="#">개인정보</a></li>
-            <li><a class="dropdown-item" href="#">?</a></li>
+            <li><a href="member" router-link to="{ name: 'member'}" class="dropdown-item">회원가입</a></li>
           </ul>
         </li>
       </ul>

@@ -2,63 +2,44 @@
 
 <template>
   <div>
-  <div id="wrapper" class="container row" style="float: none; margin: 100 auto">
-    <!-- <div class="col-md-3" style="float: none; margin: 0 auto">
-      <div class="col-lg-8 col-md-10 col-sm-12"> -->
-    <h2 class="my-3 py-3 shadow-sm bg-light text-center">
+    <h2 class="my-3 py-3 text-center">
       <mark class="orange">회원가입</mark>
     </h2>
-  </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">닉네임</label>
-    <div class="col-sm-10">
-      <input type="id" class="form-control" id="inputEmail3" />
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="inputNickname" class="form-label">닉네임</label>
+            <input type="text" class="form-control" id="inputNickname" />
+          </div>
+          <div class="mb-3">
+            <label for="inputId" class="form-label">아이디</label>
+            <input type="text" class="form-control" id="inputId" />
+          </div>
+          <div class="mb-3">
+            <label for="inputPassword" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="inputPassword" />
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="inputEmail" />
+          </div>
+          <div class="text-center">
+            <button id="btn" type="submit" class="btn btn-primary">Sign in</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
-    <div class="col-sm-10">
-      <input type="id" class="form-control" id="inputEmail3" />
-    </div>
-  </div>
-  <div class="row mb-3">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3" />
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">이메일</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" />
-    </div>
-  </div>
-
-  <div class="col-auto text-center">
-    <button id="btn" type="submit" class="btn btn-primary">Sign in</button>
-    <!-- </div>
-  </div> -->
-  </div>
-</div>
 </template>
 
 <style scoped>
-/* * {
-  text-align: center;
-} */
-#wrapper {
-  width: 300px;
-  margin: auto;
+.form-control {
+  width: 100%;
 }
+
 #btn {
   display: inline-block;
-}
-.form-control {
-  border: 1px round aliceblue;
-  width: 25%;
-}
-.row {
-  text-align: center;
+  margin-top: 10px;
 }
 </style>

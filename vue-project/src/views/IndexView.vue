@@ -7,11 +7,13 @@ import PopularPost from '../components/mainsite/PopularPost.vue';
 </script>
 
 <template>
-    <Top></Top>
-    <LocationSite></LocationSite>
-    <MyItinerary></MyItinerary>
-    <PopularPost></PopularPost>
-    <Footer></Footer>
+    <div>
+        <Top></Top>
+        <LocationSite></LocationSite>
+        <MyItinerary></MyItinerary>
+        <PopularPost></PopularPost>
+        <Footer></Footer>
+    </div>
 </template>
 
 <style scoped>

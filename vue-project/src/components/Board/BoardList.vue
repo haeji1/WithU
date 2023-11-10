@@ -1,5 +1,9 @@
 <script setup>
-import { ref} from "vue";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 const selectOption = ref([
   { text: "검색조건", value: "" },
   { text: "글번호", value: "article_no" },
@@ -61,6 +65,11 @@ const articles = ref(articleList);
 const getArticleList = () => {
   console.log("서버에서 글목록 얻어오자!!!", param.value);
 };
+
+const moveWrite = () => {
+  router.push({ name: "article-write" });
+};
+
 </script>
 
 <template>
