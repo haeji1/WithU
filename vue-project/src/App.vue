@@ -7,17 +7,15 @@ import LocalMapView from "./views/LocalMapView.vue";
 </script>
 
 <template>
-<div>
-  <Heading></Heading>
   <div>
-    <!-- <IndexView></IndexView> -->
-    <!-- <RegisterForm></RegisterForm> -->
-    <!-- <BoardList></BoardList> -->
-    <LocalMapView></LocalMapView>
+    <Heading></Heading>
+    <div>
+      <!-- <IndexView></IndexView> -->
+      <!-- <RegisterForm></RegisterForm> -->
+      <BoardList></BoardList>
+      <LocalMapView></LocalMapView>
+    </div>
   </div>
-</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
