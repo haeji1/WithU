@@ -4,10 +4,10 @@ import LocalsitePage from "../components/localsite/LocalsitePage.vue";
 </script>
 <template>
     <div class="container-fluid">
+        <LocalsitePage></LocalsitePage>
         <div id="map" class="d-flex justify-content-center align-items-center">
             <localsitemapVue></localsitemapVue>
         </div>
-        <LocalsitePage></LocalsitePage>
     </div>
 </template>
 
