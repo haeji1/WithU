@@ -42,4 +42,8 @@
   display: inline-block;
   margin-top: 10px;
 }
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> b6cd7dcbd6271688dffa5cae7c118a35e0a921dc
