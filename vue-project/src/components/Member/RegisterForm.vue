@@ -1,6 +1,7 @@
 <script setup></script>
 
 <template>
+  <div>
   <div id="wrapper" class="container row" style="float: none; margin: 100 auto">
     <!-- <div class="col-md-3" style="float: none; margin: 0 auto">
       <div class="col-lg-8 col-md-10 col-sm-12"> -->
@@ -39,6 +40,7 @@
     <!-- </div>
   </div> -->
   </div>
+</div>
 </template>
 
 <style scoped>
