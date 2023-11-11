@@ -1,7 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 import IndexView from "../views/IndexView.vue";
-import BoardList from "../components/Board/BoardList.vue";
 import RegisterForm from "../components/Member/RegisterForm.vue";
+import LocalMapView from "../views/LocalMapView.vue";
+import LoginForm from "../components/Member/LoginForm.vue";
+import TheNoticeView from "../views/TheNoticeView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -9,6 +11,11 @@ const router = createRouter({
       path: "/",
       name: "index",
       component: IndexView,
+    },
+    {
+      path: "/notice",
+      name: "notice",
+      component: TheNoticeView,
     },
     {
       path: "/board",
@@ -40,15 +47,30 @@ const router = createRouter({
         //   name: "article-modify",
         //   component: () => import("@/components/board/BoardModify.vue"),
         // },
-      
       ],
     },
     {
       path: "/member",
       name: "member",
-      component: RegisterForm
-    }
-  ]
-})
+      children: [
+        {
+          path: "/member/login",
+          name: "login",
+          component: LoginForm,
+        },
+        {
+          path: "/member/register",
+          name: "register",
+          component: RegisterForm,
+        },
+      ],
+    },
+    {
+      path: "/map",
+      name: "map",
+      component: LocalMapView,
+    },
+  ],
+});
 
-export default router
+export default router;
