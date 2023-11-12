@@ -1,5 +1,5 @@
 <script setup>
-import BoardFormItem from "./item/BoardFormItem.vue";
+import NoticeFormItem from "./item/NoticeFormItem.vue";
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import BoardFormItem from "./item/BoardFormItem.vue";
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <BoardFormItem type="regist" />
+        <NoticeFormItem type="regist" />
       </div>
     </div>
   </div>

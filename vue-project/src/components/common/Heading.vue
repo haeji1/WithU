@@ -92,7 +92,15 @@
                       >로그인</a
                     >
                   </li>
-                  <li><a class="dropdown-item" href="#">개인정보</a></li>
+                  <li>
+                    <a
+                      href="/member/mypage"
+                      router-link
+                      to="{ name: 'member'}"
+                      class="dropdown-item"
+                      >개인정보</a
+                    >
+                  </li>
                   <li>
                     <a
                       href="/member/register"

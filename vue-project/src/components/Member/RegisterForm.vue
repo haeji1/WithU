@@ -1,10 +1,12 @@
 <script setup></script>
 
 <template>
-  <div>
-    <h2 class="my-3 py-3 text-center">
-      <mark class="orange">회원가입</mark>
-    </h2>
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+      <h2 class="my-3 py-3 shadow-sm bg-light text-center">
+        <mark class="sky">회원가입</mark>
+      </h2>
+    </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
@@ -25,7 +27,9 @@
             <input type="email" class="form-control" id="inputEmail" />
           </div>
           <div class="text-center">
-            <button id="btn" type="submit" class="btn btn-primary">Sign in</button>
+            <button id="btn" type="submit" class="btn btn-primary">
+              Sign in
+            </button>
           </div>
         </div>
       </div>
@@ -42,4 +46,4 @@
   display: inline-block;
   margin-top: 10px;
 }
-
+</style>

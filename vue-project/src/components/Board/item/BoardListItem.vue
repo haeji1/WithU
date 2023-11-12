@@ -7,9 +7,10 @@ defineProps({ article: Object });
     <th scope="row">{{ article.articleNo }}</th>
     <td class="text-start">
       <router-link
-       :to="{name:'article-view', params:{articleno: article.articleNo}}"
-        class="article-title link-dark">
-      {{ article.subject }}
+        :to="{ name: 'article-view', params: { articleno: article.articleNo } }"
+        class="article-title link-dark"
+      >
+        {{ article.subject }}
       </router-link>
     </td>
     <td>{{ article.userName }}</td>

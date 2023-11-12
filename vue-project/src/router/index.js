@@ -3,7 +3,9 @@ import IndexView from "../views/IndexView.vue";
 import RegisterForm from "../components/Member/RegisterForm.vue";
 import LocalMapView from "../views/LocalMapView.vue";
 import LoginForm from "../components/Member/LoginForm.vue";
+import MypageForm from "../components/Member/MypageForm.vue";
 import TheNoticeView from "../views/TheNoticeView.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,7 +30,7 @@ const router = createRouter({
       redirect: { name: "article-list" },
       children: [
         {
-          path: "list",
+          path: "artcle-list",
           name: "article-list",
           component: () => import("@/components/Board/BoardList.vue"),
         },
@@ -38,9 +40,41 @@ const router = createRouter({
         //   component: () => import("@/components/board/BoardDetail.vue"),
         // },
         {
-          path: "write",
+          path: "article-write",
           name: "article-write",
           component: () => import("@/components/Board/BoardWrite.vue"),
+        },
+        // {
+        //   path: "modify/:articleno",
+        //   name: "article-modify",
+        //   component: () => import("@/components/board/BoardModify.vue"),
+        // },
+      ],
+    },
+    {
+      path: "/notice",
+      name: "notice",
+      // component: TheBoardView,
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/TheNoticeView.vue"),
+      redirect: { name: "notice-list" },
+      children: [
+        {
+          path: "notice-list",
+          name: "notice-list",
+          component: () => import("@/components/notice/NoticeList.vue"),
+        },
+        // {
+        //   path: "view/:articleno",
+        //   name: "article-view",
+        //   component: () => import("@/components/board/BoardDetail.vue"),
+        // },
+        {
+          path: "notice-write",
+          name: "notice-write",
+          component: () => import("@/components/notice/NoticeWrite.vue"),
         },
         // {
         //   path: "modify/:articleno",
@@ -62,6 +96,11 @@ const router = createRouter({
           path: "/member/register",
           name: "register",
           component: RegisterForm,
+        },
+        {
+          path: "/member/mypage",
+          name: "mypage",
+          component: MypageForm,
         },
       ],
     },
