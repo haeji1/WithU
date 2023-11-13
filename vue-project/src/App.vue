@@ -17,7 +17,6 @@ import LocalMapView from "./views/LocalMapView.vue";
       <!-- <BoardWriteVue/> -->
       <!-- <IndexView></IndexView> -->
       <!-- <RegisterForm></RegisterForm> -->
-      <!-- aaaa -->
     </div>
   </div>
 </template>
