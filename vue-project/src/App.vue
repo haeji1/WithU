@@ -10,12 +10,11 @@ import LocalMapView from "./views/LocalMapView.vue";
 
 <template>
   <div>
-
     <Heading></Heading>
     <router-view></router-view>
     <div>
       <!-- <BoardWriteVue/> -->
-      <!-- <IndexView></IndexView> -->
+      <!-- <Indexc:></Indexc:\Users\SSAFY\finalpassprojectView> -->
       <!-- <RegisterForm></RegisterForm> -->
       <!-- aaaa -->
     </div>
