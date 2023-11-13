@@ -1,65 +1,44 @@
 <script setup>
-import { ref } from "vue";
+import axios from "axios";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import BoardListItem from "@/components/Board/item/BoardListItem.vue";
 
 const router = useRouter();
+const articles = ref([]);
 
-const selectOption = ref([
-  { text: "검색조건", value: "" },
-  { text: "글번호", value: "article_no" },
-  { text: "제목", value: "subject" },
-  { text: "작성자아이디", value: "user_id" },
-]);
+const url = import.meta.env.VITE_BOARD_API_URL;
 
-const articleList = [
-  {
-    articleNo: 100,
-    subject: "안녕하세요1",
-    userId: "ssafy",
-    userName: "김싸피",
-    hit: 123,
-    registerDate: "25.12.25",
-  },
-  {
-    articleNo: 99,
-    subject: "안녕하세요2",
-    userId: "admin",
-    userName: "관리자",
-    hit: 100,
-    registerDate: "25.12.24",
-  },
-  {
-    articleNo: 98,
-    subject: "안녕하세요3",
-    userId: "parkssafy",
-    userName: "박싸피",
-    hit: 78,
-    registerDate: "24.12.31",
-  },
-  {
-    articleNo: 97,
-    subject: "안녕하세요4",
-    userId: "ssafy",
-    userName: "김싸피",
-    hit: 33,
-    registerDate: "24.12.20",
-  },
-  {
-    articleNo: 96,
-    subject: "내 생일이에요!!!",
-    userId: "ssafy",
-    userName: "김싸피",
-    hit: 1004,
-    registerDate: "23.12.20",
-  },
-];
+onMounted(() => {
+  getArticles();
+});
+
+const getArticles = () => {
+  axios
+    .get(url)
+    .then(({ data }) => {
+      console.log(data.resdata);
+      articles.value = data.resdata;
+      console.log(articles.value);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+// const selectOption = ref([
+//   { text: "검색조건", value: "" },
+//   { text: "글번호", value: "article_no" },
+//   { text: "제목", value: "subject" },
+//   { text: "작성자아이디", value: "user_id" },
+// ]);
+
 const param = ref({
-//   pgno: currentPage.value,
+  //   pgno: currentPage.value,
   spp: import.meta.env.VITE_ARTICLE_LIST_SIZE,
   key: "",
   word: "",
 });
-const articles = ref(articleList);
+
 // const currentPage = ref(7);
 // const totalPage = ref(35);
 const getArticleList = () => {
@@ -69,11 +48,10 @@ const getArticleList = () => {
 const moveWrite = () => {
   router.push({ name: "article-write" });
 };
-
 </script>
 
 <template>
-    <div class="container">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">
@@ -113,11 +91,9 @@ const moveWrite = () => {
             </tr>
           </thead>
           <tbody>
-            <BoardListItem
-              v-for="article in articles"
-              :key="article.articleNo"
-              :article="article"
-            ></BoardListItem>
+            <template v-for="article in articles">
+              <BoardListItem :article="article"> </BoardListItem>
+            </template>
           </tbody>
         </table>
       </div>
@@ -130,6 +106,4 @@ const moveWrite = () => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
