@@ -6,7 +6,9 @@
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <!-- <div class="container"> -->
         <div class="container-fluid">
-          <router-link :to="{ name: 'index' }" class="navbar-brand">NavBar</router-link>
+          <router-link :to="{ name: 'index' }" class="navbar-brand"
+            >NavBar</router-link
+          >
           <!-- <a>Navbar</a> -->
 
           <button
@@ -20,12 +22,17 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNavDropdown"
+          >
             <ul class="navbar-nav">
               <li class="nav-item">
-                <router-link to="/map"> 지지지지역별 </router-link>
+                <!-- <router-link to="/map"> 지역별여행지 </router-link> -->
 
-                <a href="/map" class="nav-link active" aria-current="page">지역별여행지</a>
+                <a class="nav-link active" aria-current="page"
+                  ><router-link to="/map">지역별여행지</router-link></a
+                >
               </li>
               <li class="nav-item dropdown">
                 <a
@@ -39,14 +46,14 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="/notice" router-link to="{ name: 'notice'}" class="dropdown-item"
-                      >공지사항</a
+                    <a class="dropdown-item">
+                      <router-link to="/notice">공지사항</router-link></a
                     >
                   </li>
                   <!-- <li><a class="dropdown-item">게시판</a></li> -->
                   <li>
-                    <a href="/board" router-link to="{ name: 'board' }" class="dropdown-item"
-                      >게시판</a
+                    <a class="dropdown-item">
+                      <router-link to="/board">게시판</router-link></a
                     >
                   </li>
                 </ul>
@@ -66,26 +73,22 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="/member/login" router-link to="{name: 'login'}" class="dropdown-item"
-                      >로그인</a
+                    <a class="dropdown-item"
+                      ><router-link to="/member/login">로그인</router-link></a
                     >
                   </li>
                   <li>
-                    <a
-                      href="/member/mypage"
-                      router-link
-                      to="{ name: 'member'}"
-                      class="dropdown-item"
-                      >개인정보</a
+                    <a class="dropdown-item"
+                      ><router-link to="/member/mypage"
+                        >개인정보</router-link
+                      ></a
                     >
                   </li>
                   <li>
-                    <a
-                      href="/member/register"
-                      router-link
-                      to="{ name: 'member'}"
-                      class="dropdown-item"
-                      >회원가입</a
+                    <a class="dropdown-item"
+                      ><router-link to="/member/register"
+                        >회원가입</router-link
+                      ></a
                     >
                   </li>
                 </ul>
@@ -102,5 +105,9 @@
 .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 </style>
