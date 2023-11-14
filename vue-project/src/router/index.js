@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import IndexView from "../views/IndexView.vue";
-import RegisterForm from "../components/Member/RegisterForm.vue";
+import RegisterView from "../views/RegisterView.vue";
 import LocalMapView from "../views/LocalMapView.vue";
-import LoginForm from "../components/Member/LoginForm.vue";
+import LoginView from "../views/LoginView.vue";
 import MypageForm from "../components/Member/MypageForm.vue";
 import TheNoticeView from "../views/TheNoticeView.vue";
 
@@ -90,12 +90,12 @@ const router = createRouter({
         {
           path: "/member/login",
           name: "login",
-          component: LoginForm,
+          component: LoginView,
         },
         {
           path: "/member/register",
           name: "register",
-          component: RegisterForm,
+          component: RegisterView,
         },
         {
           path: "/member/mypage",
@@ -111,5 +111,4 @@ const router = createRouter({
     },
   ],
 });
-
 export default router;
