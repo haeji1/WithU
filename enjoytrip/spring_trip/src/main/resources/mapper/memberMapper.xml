@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper
+	namespace="com.ssafy.spring.member.repository.MemberRepository">
+	<select id="login" resultType="memdto" parameterType="memdto">
+		select *
+		from members
+		where userId = #{userId} and userPwd = #{userPwd}
+	</select>
+
+	<select id="mypage" resultType="memdto" parameterType="string">
+		select *
+		from members
+		where userId = #{id}
+	</select>
+
+	<update id="modify" parameterType="memdto">
+		update members set userPwd =
+		#{userPwd}
+		where userId = #{userId}
+	</update>
+
+	<insert id="join" parameterType="memdto">
+		insert into members(userId, userName, userPwd, emailDomain, joinDate, emailId)
+		values(#{userId},#{userName},#{userPwd},#{emailDomain}, now(), #{emailId})
+	</insert>
+	<delete id="delete" parameterType="string">
+		delete from members
+		where userId = #{id}
+	</delete>
+</mapper>
