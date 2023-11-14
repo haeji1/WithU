@@ -16,7 +16,6 @@ import LocalMapView from "./views/LocalMapView.vue";
       <!-- <BoardWriteVue/> -->
       <!-- <Indexc:></Indexc:\Users\SSAFY\finalpassprojectView> -->
       <!-- <RegisterForm></RegisterForm> -->
-      <!-- aaaa -->
     </div>
   </div>
 </template>
