@@ -1,9 +1,9 @@
 <script setup>
 import { onMounted } from "vue";
-
+// import BoardDetail from "../BoardDetail.vue";
 const props = defineProps({ article: Object });
 onMounted(() => {
-  console.log(props.article.subject);
+  // console.log(props.article);
 });
 </script>
 
@@ -11,16 +11,15 @@ onMounted(() => {
   <tr class="text-center">
     <th scope="row">{{ props.article.articleNo }}</th>
     <td class="text-start">
-      <!-- <router-link
+      <router-link
         :to="{ name: 'article-view', params: { articleno: props.article.articleNo } }"
         class="article-title link-dark"
       >
-        {{ article.subject }}
-      </router-link> -->
+        {{ props.article.subject }}
+      </router-link>
     </td>
     <td>{{ props.article.userId }}</td>
     <td>{{ props.article.hit }}</td>
-    <!-- <td>{{ article.registerDate }}</td> -->
   </tr>
 </template>
 

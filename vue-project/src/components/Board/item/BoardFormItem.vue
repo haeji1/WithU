@@ -1,4 +1,5 @@
 <script setup>
+import axios from "axios";
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 
@@ -6,6 +7,8 @@ const props = defineProps({ type: String });
 
 const isUseId = ref(false);
 const router = useRouter();
+
+const url = import.meta.env.VITE_BOARD_WRITE_API_URL;
 
 const article = ref({
   articleNo: 0,
@@ -68,11 +71,23 @@ function onSubmit() {
 }
 
 function writeArticle() {
+  router.push({ name: "article-list" });
   console.log("글등록하자!!", article.value);
+  // console.log(article.value.subject);
+  // console.log(article.value.content);
+  axios
+    .post(url, article.value)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function updateArticle() {
-  console.log(article.value.articleNo + "번글 수정하자!!", article.value);
+  router.push({ name: "article-list" });
+  console.log(article.value.articleNo + "번글 수정하자!!");
 }
 
 const moveList = () => {
@@ -83,48 +98,21 @@ const moveList = () => {
 <template>
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
-      <label for="userid" class="form-label">작성자 ID : </label>
-      <input
-        type="text"
-        class="form-control"
-        v-model="article.userId"
-        :disabled="isUseId"
-        placeholder="작성자ID..."
-      />
-    </div>
-    <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>
-      <input
-        type="text"
-        class="form-control"
-        v-model="article.subject"
-        placeholder="제목..."
-      />
+      <input type="text" class="form-control" v-model="article.subject" placeholder="제목..." />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea
-        class="form-control"
-        v-model="article.content"
-        rows="10"
-      ></textarea>
+      <textarea class="form-control" v-model="article.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
-      <button
-        type="submit"
-        class="btn btn-outline-primary mb-3"
-        v-if="type === 'regist'"
-      >
+      <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
         글작성
       </button>
-      <button type="submit" class="btn btn-outline-success mb-3" v-else>
+      <button type="submit" class="btn btn-outline-success mb-3" v-else @click="updateArticle">
         글수정
       </button>
-      <button
-        type="button"
-        class="btn btn-outline-danger mb-3 ms-1"
-        @click="moveList"
-      >
+      <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="moveList">
         목록으로이동...
       </button>
     </div>

@@ -1,8 +1,9 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import BoardListItem from "@/components/Board/item/BoardListItem.vue";
+import { useRouter, useRoute } from "vue-router";
+// import BoardListItem from "@/components/Board/item/BoardListItem.vue";
+import BoardListItem from "../Board/item/BoardListItem.vue";
 
 const router = useRouter();
 const articles = ref([]);
@@ -25,12 +26,6 @@ const getArticles = () => {
       console.log(error);
     });
 };
-// const selectOption = ref([
-//   { text: "검색조건", value: "" },
-//   { text: "글번호", value: "article_no" },
-//   { text: "제목", value: "subject" },
-//   { text: "작성자아이디", value: "user_id" },
-// ]);
 
 const param = ref({
   //   pgno: currentPage.value,
@@ -87,7 +82,6 @@ const moveWrite = () => {
               <th scope="col">제목</th>
               <th scope="col">작성자</th>
               <th scope="col">조회수</th>
-              <th scope="col">작성일</th>
             </tr>
           </thead>
           <tbody>

@@ -34,21 +34,21 @@ const router = createRouter({
           name: "article-list",
           component: () => import("@/components/Board/BoardList.vue"),
         },
-        // {
-        //   path: "view/:articleno",
-        //   name: "article-view",
-        //   component: () => import("@/components/board/BoardDetail.vue"),
-        // },
+        {
+          path: "article-view/:articleno",
+          name: "article-view",
+          component: () => import("@/components/board/BoardDetail.vue"),
+        },
         {
           path: "article-write",
           name: "article-write",
           component: () => import("@/components/Board/BoardWrite.vue"),
         },
-        // {
-        //   path: "modify/:articleno",
-        //   name: "article-modify",
-        //   component: () => import("@/components/board/BoardModify.vue"),
-        // },
+        {
+          path: "modify/:articleno",
+          name: "article-modify",
+          component: () => import("@/components/board/BoardModify.vue"),
+        },
       ],
     },
     {
@@ -66,11 +66,11 @@ const router = createRouter({
           name: "notice-list",
           component: () => import("@/components/notice/NoticeList.vue"),
         },
-        // {
-        //   path: "view/:articleno",
-        //   name: "article-view",
-        //   component: () => import("@/components/board/BoardDetail.vue"),
-        // },
+        {
+          path: "notice-view/:noticeno",
+          name: "notice-view",
+          component: () => import("@/components/board/BoardDetail.vue"),
+        },
         {
           path: "notice-write",
           name: "notice-write",
