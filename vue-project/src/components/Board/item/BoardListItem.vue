@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 // import BoardDetail from "../BoardDetail.vue";
 const props = defineProps({ article: Object });
 onMounted(() => {
-  // console.log(props.article);
+  console.log("item: " + props.article.content);
 });
 </script>
 
@@ -12,7 +12,10 @@ onMounted(() => {
     <th scope="row">{{ props.article.articleNo }}</th>
     <td class="text-start">
       <router-link
-        :to="{ name: 'article-view', params: { articleno: props.article.articleNo } }"
+        :to="{
+          name: 'article-view',
+          params: { articleno: props.article.articleNo },
+        }"
         class="article-title link-dark"
       >
         {{ props.article.subject }}

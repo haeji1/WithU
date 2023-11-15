@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+// import BoardFormItem from "./item/BoardFormItem.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -13,6 +14,7 @@ const url = import.meta.env.VITE_BOARD_VIEW_API_URL;
 
 onMounted(() => {
   getArticle();
+  // console.log("article:" + route.params.subject);
 });
 
 const getArticle = () => {
@@ -47,7 +49,11 @@ function moveList() {
 }
 
 function moveModify() {
-  router.push({ name: "article-modify" });
+  router.push({
+    name: "article-modify",
+    // params: { articles: route.params.articles },
+    // params: { content: articles.content, subject: articles.subject },
+  });
 }
 
 function onDeleteArticle() {
@@ -90,7 +96,17 @@ function onDeleteArticle() {
         <div class="col-md-4">
           <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary me-2" @click="moveList">글목록</button>
+            <!-- 
+            <router-link
+              :to="{
+                path: `/board/article-modify/${route.params.articleno}`,
+                params: { subject: articles.subject, content: articles.content },
+              }"
+            > -->
+
             <button type="button" class="btn btn-success me-2" @click="moveModify">글수정</button>
+            <!-- </router-link> -->
+
             <button type="button" class="btn btn-danger" @click="onDeleteArticle">글삭제</button>
           </div>
         </div>

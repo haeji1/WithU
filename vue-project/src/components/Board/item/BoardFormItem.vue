@@ -1,14 +1,18 @@
 <script setup>
 import axios from "axios";
-import { ref, watch } from "vue";
-import { useRouter } from "vue-router";
+import { ref, watch, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import BoardDetail from "../BoardDetail.vue";
 
 const props = defineProps({ type: String });
 
 const isUseId = ref(false);
 const router = useRouter();
+const route = useRoute();
 
 const url = import.meta.env.VITE_BOARD_WRITE_API_URL;
+const geturl = import.meta.env.VITE_BOARD_VIEW_API_URL;
+const updateurl = import.meta.env.VITE_BOARD_UPDATE_API_URL;
 
 const article = ref({
   articleNo: 0,
@@ -19,20 +23,44 @@ const article = ref({
   hit: 0,
   registerDate: "",
 });
+const articles = ref([]);
+
+onMounted(() => {
+  getArticles();
+  console.log("dfgfds" + articles.value);
+});
+
+const getArticles = () => {
+  axios
+    .get(geturl, {
+      params: {
+        articleNo: route.params.articleno,
+      },
+    })
+    .then(({ data }) => {
+      console.log("form" + data.resdata);
+      articles.value = data.resdata;
+      console.log(articles.value);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 if (props.type === "modify") {
   // route에서 글번호 얻어오자
-  let articleno = 10;
+  let articleno = route.params.articleno;
   console.log(articleno + "번글 얻어와서 수정할거야");
+  console.log(articles.value.content);
+  // console.log(route.parmas.subject);
+  // console.log(route.parmas.content);
   article.value = {
     articleNo: articleno,
-    subject: "안녕하세요 뷰테스트 중입니다.",
-    content:
-      "뷰테스트 중입니다. 컴포넌트 연습하고 있으며, 앞으로 props와 custom event를 처리 할 예정입니다!!!",
-    userId: "ssafy",
-    userName: "김싸피",
-    hit: 123,
-    registerDate: "25.01.01",
+    subject: articles.value.subject,
+    content: articles.value.content,
+    userId: articles.value.userId,
+    hit: articles.value.hit,
+    registerDate: articles.value.registerDate,
   };
   isUseId.value = true;
 }
@@ -88,6 +116,14 @@ function writeArticle() {
 function updateArticle() {
   router.push({ name: "article-list" });
   console.log(article.value.articleNo + "번글 수정하자!!");
+  axios
+    .put(`http://localhost:8080/spring/resboard/modify/${article.value.articleNo}`, articles.value)
+    .then(({ data }) => {
+      console.log(data.value);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 const moveList = () => {
@@ -99,11 +135,11 @@ const moveList = () => {
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>
-      <input type="text" class="form-control" v-model="article.subject" placeholder="제목..." />
+      <input type="text" class="form-control" v-model="articles.subject" placeholder="제목..." />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea class="form-control" v-model="article.content" rows="10"></textarea>
+      <textarea class="form-control" v-model="articles.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
       <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
