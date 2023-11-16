@@ -3,7 +3,7 @@ import { onMounted } from "vue";
 // import BoardDetail from "../BoardDetail.vue";
 const props = defineProps({ article: Object });
 onMounted(() => {
-  console.log("item: " + props.article.content);
+  // console.log("item: " + props.article.content);
 });
 </script>
 

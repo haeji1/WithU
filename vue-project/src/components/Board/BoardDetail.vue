@@ -63,6 +63,7 @@ function onDeleteArticle() {
     .delete(`http://localhost:8080/spring/resboard/delete/${route.params.articleno}`)
     .then((response) => {
       console.log(`Deleted post with ID ${route.params.articleno}`);
+      alert("삭제되었습니다");
     })
     .catch((error) => {
       console.error(error);

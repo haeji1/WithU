@@ -27,7 +27,7 @@ const articles = ref([]);
 
 onMounted(() => {
   getArticles();
-  console.log("dfgfds" + articles.value);
+  // console.log("dfgfds" + articles.value);
 });
 
 const getArticles = () => {
@@ -100,7 +100,7 @@ function onSubmit() {
 
 function writeArticle() {
   router.push({ name: "article-list" });
-  console.log("글등록하자!!", article.value);
+  console.log("글등록하자!!", articles.value);
   // console.log(article.value.subject);
   // console.log(article.value.content);
   axios

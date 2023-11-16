@@ -11,7 +11,7 @@ import BoardFormItem from "./item/BoardFormItem.vue";
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <BoardFormItem type="modify" :articles="$route.params.article" />
+        <BoardFormItem type="modify" />
       </div>
     </div>
   </div>
