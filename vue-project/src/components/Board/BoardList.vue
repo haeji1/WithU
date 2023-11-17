@@ -7,10 +7,13 @@ import BoardListItem from "../Board/item/BoardListItem.vue";
 
 const router = useRouter();
 const articles = ref([]);
+const user = JSON.parse(sessionStorage.getItem("user"));
 
 const url = import.meta.env.VITE_BOARD_API_URL;
 
 onMounted(() => {
+  articles.value.userId = user;
+  // console.log(articles.value.userId);
   getArticles();
 });
 
@@ -18,7 +21,8 @@ const getArticles = () => {
   axios
     .get(url)
     .then(({ data }) => {
-      console.log(data.resdata);
+      // console.log(data.resdata);
+      // console.log(data);
       articles.value = data.resdata;
       console.log(articles.value);
     })
@@ -43,6 +47,8 @@ const getArticleList = () => {
 const moveWrite = () => {
   router.push({ name: "article-write" });
 };
+
+console.log(articles.value);
 </script>
 
 <template>
@@ -81,7 +87,7 @@ const moveWrite = () => {
               <th scope="col">글번호</th>
               <th scope="col">제목</th>
               <th scope="col">작성자</th>
-              <th scope="col">조회수</th>
+              <!-- <th scope="col">조회수</th> -->
             </tr>
           </thead>
           <tbody>

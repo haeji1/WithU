@@ -38,7 +38,15 @@ const logout = async function () {
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <!-- <div class="container"> -->
         <div class="container-fluid">
-          <router-link :to="{ name: 'index' }" class="navbar-brand">NavBar</router-link>
+          <router-link :to="{ name: 'index' }" class="navbar-brand">
+            <img
+              src="@/assets/logo3.png"
+              alt="로고"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+            />
+          </router-link>
           <!-- <a>Navbar</a> -->
 
           <button
@@ -134,5 +142,10 @@ const logout = async function () {
 a {
   text-decoration: none;
   color: black;
+}
+
+.navbar-brand img {
+  width: 80px; /* 이미지의 너비를 조정하여 크기를 변경하세요 */
+  height: auto; /* 높이를 자동 조정하여 이미지의 비율을 유지합니다 */
 }
 </style>

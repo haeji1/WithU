@@ -10,6 +10,8 @@ const isUseId = ref(false);
 const router = useRouter();
 const route = useRoute();
 
+const user = JSON.parse(sessionStorage.getItem("user"));
+
 const url = import.meta.env.VITE_BOARD_WRITE_API_URL;
 const geturl = import.meta.env.VITE_BOARD_VIEW_API_URL;
 const updateurl = import.meta.env.VITE_BOARD_UPDATE_API_URL;
@@ -24,9 +26,12 @@ const article = ref({
   registerDate: "",
 });
 const articles = ref([]);
+// const user = JSON.parse(sessionStorage.getItem("user"));
 
 onMounted(() => {
   getArticles();
+  console.log("mounted");
+  console.log(articles.value);
   // console.log("dfgfds" + articles.value);
 });
 
@@ -40,7 +45,13 @@ const getArticles = () => {
     .then(({ data }) => {
       console.log("form" + data.resdata);
       articles.value = data.resdata;
-      console.log(articles.value);
+      console.log("===getarticle===");
+      console.log(articles);
+      article.value.content = articles.value.content;
+      article.value.subject = articles.value.subject;
+      if (user !== null) article.value.userId = user;
+      console.log("===" + article.value.userId);
+      console.log(article.value.userId);
     })
     .catch((error) => {
       console.log(error);
@@ -48,19 +59,21 @@ const getArticles = () => {
 };
 
 if (props.type === "modify") {
+  console.log(articles.value.userId);
   // route에서 글번호 얻어오자
   let articleno = route.params.articleno;
-  console.log(articleno + "번글 얻어와서 수정할거야");
-  console.log(articles.value.content);
+  console.log(articleno + "번글 얻어와서 수정할거야==");
+  console.log(articles.value);
+
   // console.log(route.parmas.subject);
   // console.log(route.parmas.content);
   article.value = {
     articleNo: articleno,
-    subject: articles.value.subject,
-    content: articles.value.content,
-    userId: articles.value.userId,
-    hit: articles.value.hit,
-    registerDate: articles.value.registerDate,
+    subject: article.value.subject,
+    content: article.value.content,
+    userId: article.value.userId,
+    hit: article.value.hit,
+    registerDate: article.value.registerDate,
   };
   isUseId.value = true;
 }
@@ -99,27 +112,32 @@ function onSubmit() {
 }
 
 function writeArticle() {
-  router.push({ name: "article-list" });
-  console.log("글등록하자!!", articles.value);
-  // console.log(article.value.subject);
-  // console.log(article.value.content);
-  axios
-    .post(url, article.value)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (user !== null) {
+    console.log("글등록하자!!");
+    article.value.userId = user;
+    console.log(article.value.userId);
+    axios
+      .post(url, article.value)
+      .then((response) => {
+        console.log(response);
+        router.push({ name: "article-list" });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    router.push({ name: "login" });
+    alert("로그인하세요");
+  }
 }
 
 function updateArticle() {
-  router.push({ name: "article-list" });
-  console.log(article.value.articleNo + "번글 수정하자!!");
+  console.log(articles.value.articleNo + "번글 수정하자!!");
   axios
-    .put(`http://localhost:8080/spring/resboard/modify/${article.value.articleNo}`, articles.value)
+    .put(`http://localhost:8080/spring/resboard/modify/${articles.value.articleNo}`, article.value)
     .then(({ data }) => {
       console.log(data.value);
+      router.push({ name: "article-list" });
     })
     .catch((error) => {
       console.log(error);
@@ -135,11 +153,11 @@ const moveList = () => {
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>
-      <input type="text" class="form-control" v-model="articles.subject" placeholder="제목..." />
+      <input type="text" class="form-control" v-model="article.subject" placeholder="제목..." />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea class="form-control" v-model="articles.content" rows="10"></textarea>
+      <textarea class="form-control" v-model="article.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
       <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
