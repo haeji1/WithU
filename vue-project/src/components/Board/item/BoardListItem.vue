@@ -3,14 +3,15 @@ import { onMounted } from "vue";
 // import BoardDetail from "../BoardDetail.vue";
 const props = defineProps({ article: Object });
 onMounted(() => {
-  console.log("item: " + props.article.content);
+  // console.log("item: " + props.article.content);
+  // console.log(props.article.userId);
 });
 </script>
 
 <template>
   <tr class="text-center">
     <th scope="row">{{ props.article.articleNo }}</th>
-    <td class="text-start">
+    <td class="text-center">
       <router-link
         :to="{
           name: 'article-view',
@@ -22,7 +23,6 @@ onMounted(() => {
       </router-link>
     </td>
     <td>{{ props.article.userId }}</td>
-    <td>{{ props.article.hit }}</td>
   </tr>
 </template>
 

@@ -51,18 +51,17 @@ function moveList() {
 function moveModify() {
   router.push({
     name: "article-modify",
-    // params: { articles: route.params.articles },
-    // params: { content: articles.content, subject: articles.subject },
   });
 }
 
 function onDeleteArticle() {
   console.log(route.params.articleno + "번글 삭제하러 가자!!!");
-  router.push({ name: "article-list" });
   axios
     .delete(`http://localhost:8080/spring/resboard/delete/${route.params.articleno}`)
     .then((response) => {
       console.log(`Deleted post with ID ${route.params.articleno}`);
+      alert("삭제되었습니다");
+      router.push({ name: "article-list" });
     })
     .catch((error) => {
       console.error(error);
@@ -78,34 +77,23 @@ function onDeleteArticle() {
           <mark class="sky">글보기</mark>
         </h2>
       </div>
-      <div class="col-lg-10 text-start">
+      <div class="col-lg-10 text-center">
         <div class="row my-2">
-          <h2 class="text-secondary px-5">
-            제목 : {{ articles.subject }} 내용 : {{ articles.content }}
-          </h2>
+          <h2 class="text-secondary px-5">제목 : {{ articles.subject }}</h2>
+          <h2 class="text-secondary px-5">내용 : {{ articles.content }}</h2>
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-8">
-          <div class="clearfix align-content-center">
-            <!-- (생략) -->
-          </div>
+          <div class="clearfix align-content-center"></div>
         </div>
 
         <div class="col-md-4">
           <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-primary me-2" @click="moveList">글목록</button>
-            <!-- 
-            <router-link
-              :to="{
-                path: `/board/article-modify/${route.params.articleno}`,
-                params: { subject: articles.subject, content: articles.content },
-              }"
-            > -->
 
             <button type="button" class="btn btn-success me-2" @click="moveModify">글수정</button>
-            <!-- </router-link> -->
 
             <button type="button" class="btn btn-danger" @click="onDeleteArticle">글삭제</button>
           </div>
