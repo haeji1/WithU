@@ -1,4 +1,65 @@
 <script setup>
+import { ref, onMounted } from "vue";
+import { listSido, listGugun } from "@/api/map";
+import VSelect from "@/components/common/VSelect.vue";
+
+const { VITE_OPEN_API_SERVICE_KEY } = import.meta.env;
+
+
+const sidoList = ref([]);
+const gugunList = ref([{ text: "구군선택", value: "" }]);
+const chargingStations = ref([]);
+const selectStation = ref({});
+
+const param = ref({
+  serviceKey: VITE_OPEN_API_SERVICE_KEY,
+  pageNo: 1,
+  numOfRows: 20,
+  zscode: 0,
+});
+
+onMounted(() => {
+  // getChargingStations();
+  getSidoList();
+});
+
+const getSidoList = () => {
+  listSido(
+    ({ data }) => {
+      let options = [];
+      options.push({ text: "시도선택", value: "" });
+      data.forEach((sido) => {
+        options.push({ text: sido.sidoName, value: sido.sidoCode });
+      });
+      sidoList.value = options;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+};
+
+const onChangeSido = (val) => {
+  listGugun(
+    { sido: val },
+    ({ data }) => {
+      let options = [];
+      options.push({ text: "구군선택", value: "" });
+      data.forEach((gugun) => {
+        options.push({ text: gugun.gugunName, value: gugun.gugunCode });
+      });
+      gugunList.value = options;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+};
+
+const onChangeGugun = (val) => {
+  param.value.zscode = val;
+  getChargingStations();
+};
 </script>
 
 <template>
