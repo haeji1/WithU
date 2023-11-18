@@ -12,13 +12,11 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  }, proxy: {
+    '/map': {
+      target: 'http://localhost:8080/spring', // 실제 백엔드 서버 주소와 포트
+      ws: true,
+      changeOrigin: true,
+    },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "http://localhost:5173",
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    }
-  }
 })
