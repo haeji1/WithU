@@ -1,9 +1,37 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
 
 const router = useRouter();
 const route = useRoute();
+const url = import.meta.env.VITE_MEMBER_GET_API_URL;
+const user = JSON.parse(sessionStorage.getItem("user"));
+
+onMounted(() => {
+  getMember();
+});
+
+const member = ref({
+  userId: 0,
+  userName: "",
+  userPwd: "",
+  emailDomain: "",
+  joinDate: "",
+  eamilId: 0,
+});
+
+const getMember = () => {
+  axios
+    .get(`http://localhost:8080/spring/resmem/mypage/${user}`)
+    .then(({ data }) => {
+      member.value = data.resdata;
+      console.log(member.value);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 function moveHome() {
   router.push({ name: "index" });
@@ -22,19 +50,19 @@ function moveHome() {
         <div class="col-md-6">
           <div class="mb-3">
             <label for="inputNickname" class="form-label">닉네임</label>
-            <input type="text" class="form-control" />
+            <input v-model="member.userName" type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label for="inputId" class="form-label">아이디</label>
-            <input type="text" class="form-control" />
+            <input v-model="member.userId" type="text" class="form-control" />
           </div>
           <div class="mb-3">
             <label for="inputPassword" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" />
+            <input v-model="member.userPwd" type="password" class="form-control" :readonly="true" />
           </div>
           <div class="mb-3">
             <label for="inputEmail" class="form-label">이메일</label>
-            <input type="email" class="form-control" />
+            <input v-model="member.emailId" type="email" class="form-control" />
           </div>
           <div class="text-center">
             <button id="btn" type="submit" class="btn btn-primary" @click="moveHome">홈으로</button>
