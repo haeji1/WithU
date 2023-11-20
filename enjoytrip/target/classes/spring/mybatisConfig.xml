@@ -13,7 +13,7 @@
 		<typeAlias type="com.ssafy.spring.attraction.dto.AttractionDto" alias="attdto" />
 		<typeAlias type="com.ssafy.spring.attraction.dto.KeywordDto" alias="keydto" /> -->
 		<typeAlias type="com.ssafy.spring.map.model.SidoGugunCodeDto" alias="sidoGugunCodeDto" />
-		
+		<typeAlias type="com.ssafy.spring.follow.dto.FollowDto" alias="followdto"/>
 	</typeAliases>
 
 	<mappers>
@@ -22,5 +22,6 @@
 <!-- 		<mapper resource="mapper/areaMapper.xml" /> -->
 <!-- 		<mapper resource="mapper/attractionMapper.xml" /> -->
 		<mapper resource= "mapper/map.xml"></mapper>
+		<mapper resource="mapper/followMapper.xml"/>
 	</mappers>
 </configuration>

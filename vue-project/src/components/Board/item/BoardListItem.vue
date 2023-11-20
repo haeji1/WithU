@@ -23,6 +23,7 @@ onMounted(() => {
       </router-link>
     </td>
     <td>{{ props.article.userId }}</td>
+    <td>{{ props.article.registerTime }}</td>
   </tr>
 </template>
 

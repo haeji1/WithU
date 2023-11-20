@@ -119,7 +119,7 @@ const logout = async function () {
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item"
+                    <a class="dropdown-item" v-if="user === null"
                       ><router-link to="/member/register">회원가입</router-link></a
                     >
                   </li>

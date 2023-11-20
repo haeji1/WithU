@@ -6,7 +6,8 @@
 
 <mapper	namespace="com.ssafy.spring.board.repository.BoardRepository">
 	<select id="list" resultType="boarddto">
-		select * from board
+		SELECT articleno, subject, userId, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
+    	FROM board;
 	</select>
 	<insert id="write" parameterType="boarddto">
 		insert into board(userId, subject, content, registerTime)

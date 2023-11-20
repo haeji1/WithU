@@ -52,6 +52,11 @@ function moveModify() {
     name: "article-modify",
   });
 }
+
+function onFollowUser() {
+  alert(`${articles.value.userId} 님을 팔로우합니다.`);
+}
+
 function onDeleteArticle() {
   console.log(route.params.articleno + "번글 삭제하러 가자!!!");
   axios
@@ -109,6 +114,9 @@ function onDeleteArticle() {
             </button>
             <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeleteArticle">
               글삭제
+            </button>
+            <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onFollowUser">
+              팔로우하기
             </button>
           </div>
         </div>
