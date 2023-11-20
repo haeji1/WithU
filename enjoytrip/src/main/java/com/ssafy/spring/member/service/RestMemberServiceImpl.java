@@ -21,13 +21,13 @@ public class RestMemberServiceImpl implements MemberService{
 	@Override
 	public MemberDto login(MemberDto dto) {
 		// TODO Auto-generated method stub
-		return null;
+		return session.getMapper(MemberRepository.class).login(dto);
 	}
 
 	@Override
 	public MemberDto mypage(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return session.getMapper(MemberRepository.class).mypage(id);
 	}
 
 	@Override
