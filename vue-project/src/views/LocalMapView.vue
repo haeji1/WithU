@@ -8,11 +8,30 @@
         <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
       </div>
     </div>
+    <div class="col-md-3" v-for="(site, index) in sites" :key="index">
+      <div class="card mb-3">
+        <img v-bind:src="site.image" class="card-img-top" alt="Image 1" />
+        <div class="card-body">
+          <h5 class="card-title">{{ site.name }}</h5>
+          <p class="card-text">{{ site.content }}</p>
+        </div>
+      </div>
+    </div>
     <div id="map" class="map"></div>
-    <div v-for="spot in touristSpotData" :key="spot.id">
-      <h3>{{ spot.place_name }}</h3>
-      <p>{{ spot.address_name }}</p>
-      <!-- Add other properties you want to display -->
+    <br>
+    <br>
+
+    <div class="row">
+      <div v-for="spot in touristSpotData" :key="spot.id" class="col-md-3">
+        <a :href="spot.place_url" target="_blank">
+          <div class=" card mb-3">
+            <div class="card-body">
+              <h3 class="card-title">{{ spot.place_name }}</h3>
+              <p class="card-text">{{ spot.address_name }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -21,9 +40,28 @@
   width: 100%;
   height: 400px;
 }
+
+.row a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tourist-spot-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tourist-spot-card {
+  width: 100%;
+  border: 1px solid #ccc;
+  /* Add styling as needed */
+  padding: 16px;
+  box-sizing: border-box;
+}
 </style>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { listSido, listGugun } from "@/api/map";
 import VSelect from "@/components/common/VSelect.vue";
 const touristSpotData = ref([]);
@@ -70,13 +108,12 @@ const initMap = (initialCenter) => {
       }
     }
   }
-
   function displayMarker(place) {
     var marker = new kakao.maps.Marker({
       map: map,
       position: new kakao.maps.LatLng(place.y, place.x),
     });
-
+    console.log(marker);
     kakao.maps.event.addListener(marker, "click", function () {
       infowindow.setContent(
         '<div style="padding:5px;font-size:12px;">' +
@@ -86,20 +123,24 @@ const initMap = (initialCenter) => {
       infowindow.open(map, marker);
     });
   }
+  // Function to update the marker when a card is clicked
 
-  var mapTypeControl = new kakao.maps.MapTypeControl();
-  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-  var zoomControl = new kakao.maps.ZoomControl();
-  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
+  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
   kakao.maps.event.addListener(map, "idle", function () {
     ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
   });
-};
 
+  // var mapTypeControl = new kakao.maps.MapTypeControl();
+  // map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+  // var zoomControl = new kakao.maps.ZoomControl();
+  // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+};
 onMounted(() => {
-  window.kakao && window.kakao.maps ? initMap() : addKakaoMapScript();
+  // window.kakao && window.kakao.maps ? initMap() : addKakaoMapScript();
+  addKakaoMapScript();
+  getSidoList();
 });
 
 const addKakaoMapScript = () => {
@@ -119,9 +160,7 @@ const param = ref({
 const sidoList = ref([]);
 const gugunList = ref([{ text: "구군선택", value: "" }]);
 const totalsidogugun = ref("");
-onMounted(() => {
-  getSidoList();
-});
+
 
 const getSidoList = () => {
   listSido(
@@ -165,11 +204,13 @@ const onChangeGugun = (val) => {
   // console.log(param.value);
   const selectedGugun = gugunList.value.find((item) => item.value === val);
   if (selectedGugun) {
-    totalsidogugun.value += " " + selectedGugun.text;
+    var tmp = totalsidogugun.value + " " + selectedGugun.text;
+    // totalsidogugun.value += " " + selectedGugun.text;
     // 주소 검색을 통해 좌표 획득
+    console.log(totalsidogugun);
     var geocoder = new window.kakao.maps.services.Geocoder();
     // geocoder.addressSearch(totalsidogugun.value, function (result, status) {
-    geocoder.addressSearch(totalsidogugun.value, function (result, status) {
+    geocoder.addressSearch(tmp, function (result, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         // 좌표를 획득한 경우, 지도 이동
         var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
@@ -178,8 +219,6 @@ const onChangeGugun = (val) => {
         console.log("Geocoder failed due to: " + status);
       }
     });
-
-
   }
 };
-</script>
+</script >
