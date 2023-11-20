@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { onMounted } from "vue";
 const props = defineProps({ plan: Object });
 onMounted(() => {
@@ -24,4 +24,4 @@ onMounted(() => {
 a {
     text-decoration: none;
 }
-</style>
+</style> -->
