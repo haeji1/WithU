@@ -114,6 +114,34 @@ const router = createRouter({
       name: "map",
       component: LocalMapView,
     },
+    {
+      path: "/plan",
+      name: "plan",
+      component: () => import("../views/PlanView.vue"),
+      redirect: { name: "plan-list" },
+      children: [
+        {
+          path: "plan-list",
+          name: "plan-list",
+          component: () => import("@/components/plan/PlanList.vue"),
+        },
+        {
+          path: "plan-view/:articleno",
+          name: "plan-view",
+          component: () => import("@/components/plan/PlanDetail.vue"),
+        },
+        {
+          path: "plan-write",
+          name: "plan-write",
+          component: () => import("@/components/plan/PlanWrite.vue"),
+        },
+        {
+          path: "plan-modify/:articleno",
+          name: "plan-modify",
+          component: () => import("@/components/plan/PlanModify.vue"),
+        },
+      ],
+    },
   ],
 });
 export default router;

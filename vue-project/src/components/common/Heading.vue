@@ -39,25 +39,12 @@ const logout = async function () {
         <!-- <div class="container"> -->
         <div class="container-fluid">
           <router-link :to="{ name: 'index' }" class="navbar-brand">
-            <img
-              src="@/assets/logo3.png"
-              alt="로고"
-              width="30"
-              height="30"
-              class="d-inline-block align-top"
-            />
+            <img src="@/assets/logo3.png" alt="로고" width="30" height="30" class="d-inline-block align-top" />
           </router-link>
           <!-- <a>Navbar</a> -->
 
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
@@ -67,18 +54,11 @@ const logout = async function () {
               </li>
               <li class="nav-item">
                 <!-- <router-link to="/map"> 지역별여행지 </router-link> -->
-                <a class="nav-link active" aria-current="page"
-                  ><router-link to="/map">지역별여행지</router-link></a
-                >
+                <a class="nav-link active" aria-current="page"><router-link to="/map">지역별여행지</router-link></a>
               </li>
               <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
                   게시판
                 </a>
                 <ul class="dropdown-menu">
@@ -92,36 +72,26 @@ const logout = async function () {
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">여행계획</a>
+                <a class="nav-link active" aria-current="page"><router-link to="/plan/plan-list">여행계획</router-link></a>
+                <!-- <a class="nav-link" href="#">여행계획</a> -->
               </li>
               <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
                   개인정보관리
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" v-if="user === null"
-                      ><router-link to="/member/login">로그인</router-link></a
-                    >
+                    <a class="dropdown-item" v-if="user === null"><router-link to="/member/login">로그인</router-link></a>
                   </li>
                   <li>
                     <a class="dropdown-item" v-if="user !== null" @click="logout()">로그아웃</a>
                   </li>
                   <li>
-                    <a class="dropdown-item"
-                      ><router-link to="/member/mypage">개인정보</router-link></a
-                    >
+                    <a class="dropdown-item"><router-link to="/member/mypage">개인정보</router-link></a>
                   </li>
                   <li>
-                    <a class="dropdown-item"
-                      ><router-link to="/member/register">회원가입</router-link></a
-                    >
+                    <a class="dropdown-item"><router-link to="/member/register">회원가입</router-link></a>
                   </li>
                 </ul>
               </li>
@@ -145,7 +115,9 @@ a {
 }
 
 .navbar-brand img {
-  width: 80px; /* 이미지의 너비를 조정하여 크기를 변경하세요 */
-  height: auto; /* 높이를 자동 조정하여 이미지의 비율을 유지합니다 */
+  width: 80px;
+  /* 이미지의 너비를 조정하여 크기를 변경하세요 */
+  height: auto;
+  /* 높이를 자동 조정하여 이미지의 비율을 유지합니다 */
 }
 </style>
