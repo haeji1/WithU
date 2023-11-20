@@ -36,6 +36,14 @@ const getMember = () => {
 function moveHome() {
   router.push({ name: "index" });
 }
+
+function moveFollower() {
+  router.push({ name: "follower" });
+}
+
+function moveFollowing() {
+  router.push({ name: "following" });
+}
 </script>
 
 <template>
@@ -64,8 +72,11 @@ function moveHome() {
             <label for="inputEmail" class="form-label">이메일</label>
             <input v-model="member.emailId" type="email" class="form-control" />
           </div>
-          <div class="text-center">
-            <button id="btn" type="submit" class="btn btn-primary" @click="moveHome">홈으로</button>
+
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary me-2" @click="moveHome">홈으로</button>
+            <button type="submit" class="btn btn-primary me-2" @click="moveFollower">팔로워</button>
+            <button type="submit" class="btn btn-primary" @click="moveFollowing">팔로잉</button>
           </div>
         </div>
       </div>
