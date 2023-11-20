@@ -1,10 +1,9 @@
 <script setup>
-
 </script>
 
 <template>
-    <div>
-        aaa
+    <div class="container">
+        hihi
     </div>
 </template>
 
