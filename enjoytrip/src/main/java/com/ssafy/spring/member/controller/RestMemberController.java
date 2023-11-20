@@ -3,6 +3,8 @@ package com.ssafy.spring.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -104,5 +106,52 @@ public class RestMemberController {
 		ResponseEntity<Map<String, Object>> res = new ResponseEntity<>(map,HttpStatus.OK);
 		return res;
 	};
+	@PostMapping("/login")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> MemberLogin(@RequestBody Map<String, String> loginRequest, HttpServletRequest req){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            String id = loginRequest.get("userId");
+            String password = loginRequest.get("userPwd");
+            MemberDto dto = new MemberDto();
+            dto.setUserId(id);
+            dto.setUserPwd(password);
+
+            MemberDto res = service.login(dto);
+//            System.out.println(res);
+            
+            if(res != null) {
+                req.getSession().setAttribute("userinfo", res);
+                map.put("resmsg", "입력 성공");
+                map.put("resdata", res);       
+        
+            } else {
+            
+                map.put("resmsg", "입력실패");
+                map.put("resdata", "아이디나 비밀번호를 다시 입력해주세요");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("resmsg", "입력실패");
+            map.put("resdata", e.getMessage());
+        }
+        
+        ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+        return res;
+    }
+    
+    @GetMapping("/logout")
+    @ResponseBody
+    public String logout(HttpServletRequest req) {
+        String result = "";
+        try {
+            req.getSession().invalidate();
+            result = "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = "fail";
+        }
+        return result;
+    }
 	
 }
