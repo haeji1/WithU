@@ -17,8 +17,8 @@
 			where userId = #{userId}
 		</select>
 		
-		<select id="follow" parameterType="Map">
+		<insert id="follow" parameterType="followdto">
 			insert into follow(userId, followId)
-			values(#{dto.property1}, #{id})
-		</select>
+			values(#{userId}, #{followId})
+		</insert>
 </mapper>

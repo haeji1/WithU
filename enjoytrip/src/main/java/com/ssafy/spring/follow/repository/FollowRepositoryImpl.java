@@ -32,11 +32,10 @@ public class FollowRepositoryImpl implements FollowRepository{
 	}
 
 	@Override
-	public int follow(FollowDto dto, String id) {
-		 Map<String, Object> parameters = new HashMap<>();
-		    parameters.put("dto", dto);
-		    parameters.put("id", id);
-		    return session.insert(ns + "follow", parameters);
+	public int follow(FollowDto dto) {
+		System.out.println(dto.getUserId());
+		System.out.println(dto.getFollowId());
+		return session.insert(ns+"follow", dto);
 	}
 
 }

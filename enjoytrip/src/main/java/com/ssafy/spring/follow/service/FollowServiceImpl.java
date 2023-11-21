@@ -30,8 +30,8 @@ public class FollowServiceImpl implements FollowService{
 	}
 
 	@Override
-	public int follow(FollowDto dto, String id) {
-		return repo.follow(dto, id);
+	public int follow(FollowDto dto) {
+		return repo.follow(dto);
 	}
 	
 }

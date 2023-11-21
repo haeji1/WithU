@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +34,12 @@ public class RestFollowController {
 	
 	@PostMapping("/follow")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> Follow(@RequestBody FollowDto dto, String id) {
+	public ResponseEntity<Map<String, Object>> Follow(@RequestBody FollowDto dto) {
 		Map<String, Object> map = new HashMap<>();
-		
 		try {
-//			int res = service.follow(dto,id);
-//			map.put("resmsg", "입력 성공");
-//			map.put("resdata", res);
-			map.put("dto", dto);
-			map.put("id",id);
+			int res = service.follow(dto);
 			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("resmsg", "입력실패");
