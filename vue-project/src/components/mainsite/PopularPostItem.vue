@@ -9,7 +9,7 @@ const router = useRouter();
 const articles = ref([]);
 const user = JSON.parse(sessionStorage.getItem("user"));
 
-const url = import.meta.env.VITE_BOARD_API_URL;
+const url = import.meta.env.VITE_BOARD_POP_API_URL;
 
 onMounted(() => {
   articles.value.userId = user;
