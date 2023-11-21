@@ -7,6 +7,7 @@ import MypageForm from "../components/Member/MypageForm.vue";
 import TheNoticeView from "../views/TheNoticeView.vue";
 import FollowerList from "../components/follow/FollowerList.vue";
 import FollowingList from "../components/follow/FollowingList.vue";
+import FollowDetail from "../components/follow/FollowDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -118,7 +119,6 @@ const router = createRouter({
       component: LocalMapView,
     },
     {
-<<<<<<< HEAD
       path: "/plan",
       name: "plan",
       component: () => import("../views/PlanView.vue"),
@@ -146,7 +146,7 @@ const router = createRouter({
         },
       ],
     },
-=======
+    {
       path: "/follower",
       name: "follower",
       component: FollowerList,
@@ -156,8 +156,13 @@ const router = createRouter({
       name: "following",
       component: FollowingList,
     },
+    {
+      path: "/followdetail/:followId",
+      name: "follow-detail",
+      component: FollowDetail,
+    },
     
->>>>>>> haeji
+
   ],
 });
 export default router;
