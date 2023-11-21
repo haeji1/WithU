@@ -149,8 +149,6 @@ a {
 
 .navbar-brand img {
   width: 80px;
-  /* 이미지의 너비를 조정하여 크기를 변경하세요 */
   height: auto;
-  /* 높이를 자동 조정하여 이미지의 비율을 유지합니다 */
 }
 </style>
