@@ -39,3 +39,10 @@ footer .company-info{
     height: 250px; /* 이미지 높이를 조절 */
     object-fit: cover; /* 이미지 비율 유지 및 크롭 */
   }
+
+  @font-face {
+    font-family: 'KCC-Ganpan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCC-Ganpan.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}

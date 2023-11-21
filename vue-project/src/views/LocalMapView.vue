@@ -18,13 +18,13 @@
       </div>
     </div>
     <div id="map" class="map"></div>
-    <br>
-    <br>
+    <br />
+    <br />
 
     <div class="row">
       <div v-for="spot in touristSpotData" :key="spot.id" class="col-md-3">
         <a :href="spot.place_url" target="_blank">
-          <div class=" card mb-3">
+          <div class="card mb-3">
             <div class="card-body">
               <h3 class="card-title">{{ spot.place_name }}</h3>
               <p class="card-text">{{ spot.address_name }}</p>
@@ -78,13 +78,10 @@ const initMap = (initialCenter) => {
   if (!initialCenter) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        x = position.coords.latitude,
-          y = position.coords.longitude;
-      }
-      )
-    }
-    else {
-      console.log("bbb")
+        (x = position.coords.latitude), (y = position.coords.longitude);
+      });
+    } else {
+      console.log("bbb");
       x = 37.566826;
       y = 126.9786567;
     }
@@ -102,8 +99,11 @@ const initMap = (initialCenter) => {
     if (status === kakao.maps.services.Status.OK) {
       for (var i = 0; i < data.length; i++) {
         console.log(data[i]);
+        console.log(data[i].x);
+        console.log(data[i].y);
         touristSpotData.value.push(data[i]);
         console.log(touristSpotData);
+        // console.log(touristSpotData.value.x);
         displayMarker(data[i]);
       }
     }
@@ -116,18 +116,16 @@ const initMap = (initialCenter) => {
     console.log(marker);
     kakao.maps.event.addListener(marker, "click", function () {
       infowindow.setContent(
-        '<div style="padding:5px;font-size:12px;">' +
-        place.place_name +
-        "</div>"
+        '<div style="padding:5px;font-size:12px;">' + place.place_name + "</div>"
       );
       infowindow.open(map, marker);
     });
   }
   // Function to update the marker when a card is clicked
 
-  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 3 });
   kakao.maps.event.addListener(map, "idle", function () {
-    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 15, page: 3 });
   });
 
   // var mapTypeControl = new kakao.maps.MapTypeControl();
@@ -135,7 +133,6 @@ const initMap = (initialCenter) => {
 
   // var zoomControl = new kakao.maps.ZoomControl();
   // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
 };
 onMounted(() => {
   // window.kakao && window.kakao.maps ? initMap() : addKakaoMapScript();
@@ -151,7 +148,6 @@ const addKakaoMapScript = () => {
   document.head.appendChild(script);
 };
 
-
 // const serviceKey = import.meta.env.VITE_OPEN_API_SERVICE_KEY;
 const param = ref({
   zscode: "", // or provide default values as needed
@@ -160,7 +156,6 @@ const param = ref({
 const sidoList = ref([]);
 const gugunList = ref([{ text: "구군선택", value: "" }]);
 const totalsidogugun = ref("");
-
 
 const getSidoList = () => {
   listSido(
@@ -221,4 +216,4 @@ const onChangeGugun = (val) => {
     });
   }
 };
-</script >
+</script>
