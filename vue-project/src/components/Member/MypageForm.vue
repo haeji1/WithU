@@ -10,11 +10,12 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 
 onMounted(() => {
   getMember();
+  console.log(user);
 });
 
 const member = ref({
   userId: 0,
-  userName: "",
+  userName: user,
   userPwd: "",
   emailDomain: "",
   joinDate: "",

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.spring.board.dto.BoardDto;
 import com.ssafy.spring.follow.dto.FollowDto;
 import com.ssafy.spring.follow.repository.FollowRepository;
 
@@ -33,5 +34,10 @@ public class FollowServiceImpl implements FollowService{
 	public int follow(FollowDto dto) {
 		return repo.follow(dto);
 	}
+
+//	@Override
+//	public List<BoardDto> followingboard(String followId) {
+//		return repo.followingboard(followId);
+//	}
 	
 }

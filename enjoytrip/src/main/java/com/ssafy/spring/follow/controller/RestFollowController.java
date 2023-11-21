@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssafy.spring.board.dto.BoardDto;
 import com.ssafy.spring.follow.dto.FollowDto;
 import com.ssafy.spring.follow.service.FollowService;
 
@@ -87,4 +88,21 @@ public class RestFollowController {
 		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
 		return res;
 	}
+	
+//	@GetMapping("/followdetail/{followId}")
+//	@ResponseBody
+//	public ResponseEntity<Map<String, Object>> FollowingBoard(@PathVariable("followId")String followId) {
+//		Map<String, Object> map = new HashMap<>();
+//		try {
+//			List<BoardDto> res = service.followingboard(followId);
+//			map.put("resmsg", "성공");
+//			map.put("resdata", res);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			map.put("resmsg", "출력 실패");
+//			map.put("resdata", e.getMessage());
+//		}
+//		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+//		return res;
+//	}
 }

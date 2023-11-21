@@ -70,7 +70,7 @@ function onFollowUser() {
     .post(followurl, follow.value)
     .then((response) => {
       console.log(response);
-      router.push({ name: "article-list" });
+      router.push({ name: "following" });
     })
     .catch((error) => {
       console.log(error);

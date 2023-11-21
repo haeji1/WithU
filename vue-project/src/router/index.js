@@ -7,6 +7,7 @@ import MypageForm from "../components/Member/MypageForm.vue";
 import TheNoticeView from "../views/TheNoticeView.vue";
 import FollowerList from "../components/follow/FollowerList.vue";
 import FollowingList from "../components/follow/FollowingList.vue";
+import FollowDetail from "../components/follow/FollowDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -154,6 +155,11 @@ const router = createRouter({
       path: "/follwing",
       name: "following",
       component: FollowingList,
+    },
+    {
+      path: "/followdetail/:followId",
+      name: "follow-detail",
+      component: FollowDetail,
     },
     
 

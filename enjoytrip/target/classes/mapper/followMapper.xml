@@ -21,4 +21,11 @@
 			insert into follow(userId, followId)
 			values(#{userId}, #{followId})
 		</insert>
+		
+		<select id="followingboard" parameterType="String" resultType="boarddto">
+			select subject, b.userId
+			from board b join follow f
+			on b.userId = f.followId
+			where followId = #{followId};
+		</select>
 </mapper>
