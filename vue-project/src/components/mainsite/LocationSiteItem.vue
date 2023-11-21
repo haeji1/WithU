@@ -1,45 +1,113 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from "vue";
+const touristSpotData = ref([]);
+const location = ref([]);
+const lat2 = ref();
+const lon2 = ref();
+const initMap = () => {
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      level: 11 // 지도의 확대 레벨 
+    };
 
-const sites = ref([
-  {
-    name: "한밭수목원",
-    content: "대전광역시한밭수목원은 대전광역시의 도심 내의 생물서식 공간 확보 및 학술적·환경교육적 기능수행과 시민휴게공간 기능을 부여하고, 공원시설의 관리운영,도시녹화 및 가로화단 확충사업 추진 등을 위하여 대전광역시청 산하에 설치된 사업소이다.",
-    image: "assets/img/site/hanbat.jpg"
-  },
-  {
-    name: "장태산 자연휴양림",
-    content: "장태산 자연휴양림은 장태산에 있는 넓이 82.644628 m²의 자연휴양림으로서 대전팔경 중의 하나다. 전국 최초로 민간인이 조성하고 운영되어 왔으나, 2002년 2월 대전광역시에서 인수하고 새로 리모델링해서 2006년 4월 25일 재개장했다.",
-    image: "assets/img/site/hanbat.jpg"
-  },
-  {
-    name: "국립중앙과학관",
-    content:"국립중앙과학관은 이공학·산업기술·과학기술사 및 자연사에 관한 자료의 수집·보존·연구·전시 및 교육에 관한 사무를 관장하는 대한민국 과학기술정보통신부의 소속기관이다. 1990년 10월 9일에 발족하였으며, 대전광역시 유성구 대덕대로 481에 위치하고 있다",
-    image: "assets/img/site/hanbat.jpg"
-  },
-  {
-    name: "국립중앙과학관",
-    content:"국립중앙과학관은 이공학·산업기술·과학기술사 및 자연사에 관한 자료의 수집·보존·연구·전시 및 교육에 관한 사무를 관장하는 대한민국 과학기술정보통신부의 소속기관이다. 1990년 10월 9일에 발족하였으며, 대전광역시 유성구 대덕대로 481에 위치하고 있다",
-    image: "assets/img/site/hanbat.jpg"
+  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+  var ps = new kakao.maps.services.Places(map);
+  // HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+  if (navigator.geolocation) {
+
+    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+    navigator.geolocation.getCurrentPosition(function (position) {
+
+      var lat = position.coords.latitude, // 위도
+        lon = position.coords.longitude; // 경도
+      location.value.push(lat, lon);
+      lat2.value = lat;
+      lon2.value = lon;
+      var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+        message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+
+      // 마커와 인포윈도우를 표시합니다
+      displayMarker(locPosition, message);
+      ps.categorySearch('AT4', placesSearchCB, { useMapBounds: true });
+    });
+
+  } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+      message = 'geolocation을 사용할수 없어요..'
+    lat2.value = 33.450701;
+    lon2.value = 126.570667;
+    displayMarker(locPosition, message);
+    ps.categorySearch('AT4', placesSearchCB, { useMapBounds: true });
   }
-])
+
+  // 지도에 마커와 인포윈도우를 표시하는 함수입니다
+  function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: locPosition
+    });
+
+    var iwContent = message, // 인포윈도우에 표시할 내용
+      iwRemoveable = true;
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+      content: iwContent,
+      removable: iwRemoveable
+    });
+
+    // 인포윈도우를 마커위에 표시합니다 
+    infowindow.open(map, marker);
+
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);
+  }
+  // 카테고리로 은행을 검색합니다
+
+
+  // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+  function placesSearchCB(data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i])
+        touristSpotData.value.push(data[i]);
+      }
+    }
+  }
+};
+onMounted(() => {
+  addKakaoMapScript();
+});
+const addKakaoMapScript = () => {
+  const script = document.createElement("script");
+  script.onload = () => kakao.maps.load(initMap);
+  script.src =
+    "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8a44173e88d925b5f5defa1a5db14942";
+  document.head.appendChild(script);
+};
+
 </script>
-<!-- @click="redirectToLink('/')" -->
 <template>
-  <div class="col-md-3" v-for="(site, index) in sites" :key="index">
-    <div
-      class="card mb-3" >
-      <img
-        v-bind:src="site.image"
-        class="card-img-top"
-        alt="Image 1"
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ site.name }}</h5>
-        <p class="card-text">{{ site.content }}</p>
-      </div>
+  <div id="map"></div>
+  <div class="col-md-3" v-for="(site, index) in touristSpotData.slice(0, 8)" :key="index">
+    <div class="card mb-3">
+      <a :href="site.place_url" target="_blank">
+        <!-- <img v-bind:src="site.image" class="card-img-top" alt="Image 1" /> -->
+        <div class="card-body">
+          <h5 class="card-title">{{ site.place_name }}</h5>
+          <!-- <p class="card-text">{{ site.address_name }}</p> -->
+        </div>
+      </a>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#map {
+  height: 0px;
+}
+</style>
