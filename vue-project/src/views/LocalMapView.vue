@@ -123,9 +123,9 @@ const initMap = (initialCenter) => {
   }
   // Function to update the marker when a card is clicked
 
-  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 3 });
   kakao.maps.event.addListener(map, "idle", function () {
-    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 15, page: 3 });
   });
 
   // var mapTypeControl = new kakao.maps.MapTypeControl();
