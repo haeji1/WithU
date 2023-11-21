@@ -118,7 +118,6 @@ const router = createRouter({
       component: LocalMapView,
     },
     {
-<<<<<<< HEAD
       path: "/plan",
       name: "plan",
       component: () => import("../views/PlanView.vue"),
@@ -146,7 +145,7 @@ const router = createRouter({
         },
       ],
     },
-=======
+    {
       path: "/follower",
       name: "follower",
       component: FollowerList,
@@ -157,7 +156,7 @@ const router = createRouter({
       component: FollowingList,
     },
     
->>>>>>> haeji
+
   ],
 });
 export default router;
