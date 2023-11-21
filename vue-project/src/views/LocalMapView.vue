@@ -79,16 +79,16 @@ const initMap = (initialCenter) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         x = position.coords.latitude,
-          y = position.coords.longitude
+          y = position.coords.longitude;
       }
       )
     }
     else {
+      console.log("bbb")
       x = 37.566826;
       y = 126.9786567;
     }
   }
-  console.log(x, y)
   var mapOption = {
     center: new kakao.maps.LatLng(y, x),
     level: 3,

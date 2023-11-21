@@ -145,6 +145,23 @@ public class RestBoardController {
         return res;
     }
     
+	@GetMapping("/followdetail/{followId}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> FollowingBoard(@PathVariable("followId")String followId) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<BoardDto> res = service.followingboard(followId);
+			map.put("resmsg", "성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "출력 실패");
+			map.put("resdata", e.getMessage());
+		}
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+    
 //    @DeleteMapping("/{commentNo}")
 //    public ResponseEntity<Map<String, Object>> deleteComment(@PathVariable String commentNo) {
 //        Map<String, Object> map = new HashMap<>();
@@ -161,4 +178,5 @@ public class RestBoardController {
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 //        }
 //    }
+    
 }

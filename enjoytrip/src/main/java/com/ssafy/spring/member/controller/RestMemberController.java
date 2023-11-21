@@ -65,6 +65,7 @@ public class RestMemberController {
 			MemberDto member = service.mypage(id);
 			map.put("resdata", member);
 			map.put("resmsg", "조회성공");
+			System.out.println(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("resmsg", "조회실패");

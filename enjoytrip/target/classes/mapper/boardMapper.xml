@@ -42,4 +42,9 @@
 		update board set subject = #{subject}, content = #{content}
 		where articleno = #{articleNo}
 	</update>
+	<select id= "followingboard" parameterType="String" resultType="boarddto">
+		select *
+		from board
+		where userId = #{followId}
+	</select>
 </mapper>

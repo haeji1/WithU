@@ -10,7 +10,16 @@ const router = useRouter();
 // const props = defineProps({ article: Object });
 
 const url = import.meta.env.VITE_BOARD_VIEW_API_URL;
+const followurl = import.meta.env.VITE_FOLLOW_FOLLOW_API_URL;
+const user = JSON.parse(sessionStorage.getItem("user"));
 // const durl = import.meta.env.VITE_BOARD_DELETE_API_URL;
+
+// follow 유저 아이디 세팅
+const follow = ref({
+  userId: "",
+  followId: "",
+});
+
 onMounted(() => {
   getArticle();
   // console.log("article:" + route.params.subject);
@@ -55,6 +64,17 @@ function moveModify() {
 
 function onFollowUser() {
   alert(`${articles.value.userId} 님을 팔로우합니다.`);
+  follow.value.userId = user;
+  follow.value.followId = articles.value.userId;
+  axios
+    .post(followurl, follow.value)
+    .then((response) => {
+      console.log(response);
+      router.push({ name: "following" });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function onDeleteArticle() {
