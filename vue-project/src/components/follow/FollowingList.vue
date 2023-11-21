@@ -35,19 +35,6 @@ const getFollowings = () => {
       console.log(error);
     });
 };
-
-// const param = ref({
-//   //   pgno: currentPage.value,
-//   spp: import.meta.env.VITE_ARTICLE_LIST_SIZE,
-//   key: "",
-//   word: "",
-// });
-
-// const currentPage = ref(7);
-// const totalPage = ref(35);
-// const getArticleList = () => {
-//   console.log("서버에서 글목록 얻어오자!!!", param.value);
-// };
 </script>
 
 <template>

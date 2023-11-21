@@ -60,4 +60,9 @@ public class BoardServiceImpl implements BoardService{
 		return repo.modify(dto);
 	}
 
+	@Override
+	public List<BoardDto> followingboard(String followId) {
+		return repo.followingboard(followId);
+	}
+
 }

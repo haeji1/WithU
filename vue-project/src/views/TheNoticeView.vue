@@ -2,7 +2,7 @@
 
 <template>
   <div class="container text-center mt-3">
-    <div class="alert alert-info" role="alert">공지사항</div>
+    <!-- <div class="alert alert-info" role="alert">공지사항</div> -->
     <router-view></router-view>
   </div>
 </template>

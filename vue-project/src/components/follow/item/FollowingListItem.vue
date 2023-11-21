@@ -11,7 +11,12 @@ onMounted(() => {
 
 <template>
   <tr class="text-center">
-    <th scope="row">{{ props.following.followId }}</th>
+    <!-- <th scope="row">{{ props.following.followId }}</th> -->
+    <th scope="row">
+      <router-link :to="{ name: 'follow-detail', params: { followId: props.following.followId } }">
+        {{ props.following.followId }}
+      </router-link>
+    </th>
     <td class="text-center">
       <!-- <router-link
           :to="{
