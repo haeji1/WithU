@@ -67,6 +67,16 @@ public class BoardRepositoryImpl implements BoardRepository{
 	public List<BoardDto> followingboard(String followId) {
 		return session.selectList(ns+"followingboard", followId);
 	}
+
+	@Override
+	public int updateHit(String articleNo) {
+		return session.update(ns + "updateHit", articleNo);
+	}
+
+	@Override
+	public List<BoardDto> listpop() {
+		return session.selectList(ns + "listpop");
+	}
 	
 
 }

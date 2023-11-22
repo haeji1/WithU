@@ -142,12 +142,7 @@ function getComment() {
       </div>
       <div class="row">
         <div class="col-md-8">
-          <div class="clearfix align-content-center">
-            <!-- <img
-              class="avatar me-2 float-md-start bg-light p-2"
-              src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
-            /> -->
-          </div>
+          <div class="clearfix align-content-center"></div>
         </div>
         <!-- <div class="col-md-4 align-self-center text-end">댓글 : 17</div> -->
         <div class="divider mb-3"></div>
