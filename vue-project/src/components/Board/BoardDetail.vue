@@ -123,14 +123,10 @@ function onDeleteArticle() {
       <div class="row">
         <div class="col-md-8">
           <div class="clearfix align-content-center">
-            <img
-              class="avatar me-2 float-md-start bg-light p-2"
-              src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
-            />
             <p>
               <span class="fw-bold">안효인</span> <br />
               <span class="text-secondary fw-light">
-                {{ articles.registerTime }}1 조회 : {{ articles.hit }}
+                {{ articles.content }}1 조회 : {{ articles.hit }}
               </span>
             </p>
           </div>
