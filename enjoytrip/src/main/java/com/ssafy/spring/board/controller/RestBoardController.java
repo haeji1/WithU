@@ -54,7 +54,23 @@ public class RestBoardController {
 		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
 		return res;
 	}
-	
+	@GetMapping("/list/pop")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> BoardListPop() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<BoardDto> res = service.listpop();
+			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "입력실패");
+			map.put("resdata", e.getMessage());
+		}
+		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
 	@GetMapping("/clist/{id}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> CommentList(@PathVariable("id")String articleNo) {
@@ -78,6 +94,7 @@ public class RestBoardController {
 	public ResponseEntity<Map<String, Object>> BoardView(String articleNo){
 		Map<String, Object> map = new HashMap<>();
 		try {
+			service.updateHit(articleNo);
 			BoardDto res = service.view(articleNo);
 			List<CommentDto> comment = service.getComment(articleNo);
 			map.put("resmsg", "출력 성공");
