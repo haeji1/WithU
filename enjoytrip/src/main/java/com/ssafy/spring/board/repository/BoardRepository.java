@@ -7,6 +7,7 @@ import com.ssafy.spring.board.dto.CommentDto;
 
 public interface BoardRepository {
 	public List<BoardDto> list();
+	public List<BoardDto> listpop();
 	public int write(BoardDto dto);
 	public BoardDto view(String articleNo);
 	public List<CommentDto> getComment(String articleNo);
@@ -14,4 +15,6 @@ public interface BoardRepository {
 	public int insertComment(CommentDto dto);
 	public int deleteComment(String commentNo);
 	public int modify(BoardDto dto);
+	public List<BoardDto> followingboard(String followId);
+	public int updateHit(String articleNo);
 }

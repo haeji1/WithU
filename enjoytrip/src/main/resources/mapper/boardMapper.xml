@@ -6,7 +6,7 @@
 
 <mapper	namespace="com.ssafy.spring.board.repository.BoardRepository">
 	<select id="list" resultType="boarddto">
-		SELECT articleno, subject, userId, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
+		SELECT articleno, subject, userId, hit, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
     	FROM board;
 	</select>
 	<insert id="write" parameterType="boarddto">
@@ -42,4 +42,19 @@
 		update board set subject = #{subject}, content = #{content}
 		where articleno = #{articleNo}
 	</update>
+	<select id= "followingboard" parameterType="String" resultType="boarddto">
+		select *
+		from board
+		where userId = #{followId}
+	</select>
+		<update id ="updateHit" parameterType = "string">
+		update board set hit = hit + 1
+		where articleno = #{articleNo}
+	</update>
+		<select id="listpop" resultType="boarddto">
+		SELECT articleno, subject, userId, hit, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
+    	FROM board
+    	order by hit desc, registerTime desc
+    	limit 3
+	</select>
 </mapper>

@@ -14,4 +14,7 @@ public interface BoardService {
 	public int insertComment(CommentDto dto);
 	public int deleteComment(String commentNo);
 	public int modify(BoardDto dto);
+	public List<BoardDto> followingboard(String followId);
+	public int updateHit(String articleNo);
+	public List<BoardDto> listpop();
 }

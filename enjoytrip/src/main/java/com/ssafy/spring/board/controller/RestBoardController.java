@@ -54,12 +54,47 @@ public class RestBoardController {
 		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
 		return res;
 	}
+	@GetMapping("/list/pop")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> BoardListPop() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<BoardDto> res = service.listpop();
+			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "입력실패");
+			map.put("resdata", e.getMessage());
+		}
+		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+	@GetMapping("/clist/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> CommentList(@PathVariable("id")String articleNo) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<CommentDto> res = service.getComment(articleNo);
+			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "입력실패");
+			map.put("resdata", e.getMessage());
+		}
+		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
 	
 	@GetMapping("/view")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> BoardView(String articleNo){
 		Map<String, Object> map = new HashMap<>();
 		try {
+			service.updateHit(articleNo);
 			BoardDto res = service.view(articleNo);
 			List<CommentDto> comment = service.getComment(articleNo);
 			map.put("resmsg", "출력 성공");
@@ -93,6 +128,25 @@ public class RestBoardController {
 		return res;
 	}
 	
+	@PostMapping("/cwrite")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> CommentWrite(@RequestBody CommentDto dto) {
+		Map<String, Object> map = new HashMap<>();
+		
+		try {
+			int res = service.insertComment(dto);
+			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "입력실패");
+			map.put("resdata", e.getMessage());
+		}
+		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+	
 	@DeleteMapping("/delete/{id}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> BoardDelete(@PathVariable("id")int articleNo) {
@@ -111,6 +165,23 @@ public class RestBoardController {
 		return res;
 	};
 	
+    @DeleteMapping("/cdelete/{commentNo}")
+    public ResponseEntity<Map<String, Object>> deleteComment(@PathVariable String commentNo) {
+        Map<String, Object> map = new HashMap<>();
+
+        try {
+            int res = service.deleteComment(commentNo);
+            map.put("resmsg", "댓글 삭제 성공");
+            map.put("resdata", res);
+            return ResponseEntity.ok(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("resmsg", "댓글 삭제 실패");
+            map.put("resdata", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+        }
+    }
+    
 	@PutMapping("/modify/{id}")
 	public ResponseEntity<Map<String, Object>> BoardModify(@PathVariable("id")int articleNo,@RequestBody BoardDto dto){
 		Map<String,Object> map = new HashMap();
@@ -145,20 +216,25 @@ public class RestBoardController {
         return res;
     }
     
-//    @DeleteMapping("/{commentNo}")
-//    public ResponseEntity<Map<String, Object>> deleteComment(@PathVariable String commentNo) {
-//        Map<String, Object> map = new HashMap<>();
-//
-//        try {
-//            int res = service.deleteComment(commentNo);
-//            map.put("resmsg", "댓글 삭제 성공");
-//            map.put("resdata", res);
-//            return ResponseEntity.ok(map);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            map.put("resmsg", "댓글 삭제 실패");
-//            map.put("resdata", e.getMessage());
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
-//        }
-//    }
+	@GetMapping("/followdetail/{followId}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> FollowingBoard(@PathVariable("followId")String followId) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<BoardDto> res = service.followingboard(followId);
+			map.put("resmsg", "성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "출력 실패");
+			map.put("resdata", e.getMessage());
+		}
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+	
+	
+    
+
+    
 }

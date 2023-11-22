@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.spring.board.dto.BoardDto;
 import com.ssafy.spring.follow.dto.FollowDto;
 
 @Repository
@@ -32,11 +33,13 @@ public class FollowRepositoryImpl implements FollowRepository{
 	}
 
 	@Override
-	public int follow(FollowDto dto, String id) {
-		 Map<String, Object> parameters = new HashMap<>();
-		    parameters.put("dto", dto);
-		    parameters.put("id", id);
-		    return session.insert(ns + "follow", parameters);
+	public int follow(FollowDto dto) {
+		return session.insert(ns+"follow", dto);
 	}
+
+//	@Override
+//	public List<BoardDto> followingboard(String followId) {
+//		return session.selectList(ns+"fofollowingboard"+followId);
+//	}
 
 }
