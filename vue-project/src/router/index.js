@@ -33,7 +33,7 @@ const router = createRouter({
       redirect: { name: "article-list" },
       children: [
         {
-          path: "artcle-list",
+          path: "article-list",
           name: "article-list",
           component: () => import("@/components/Board/BoardList.vue"),
         },
@@ -161,8 +161,7 @@ const router = createRouter({
       name: "follow-detail",
       component: FollowDetail,
     },
-    
-
+ 
   ],
 });
 export default router;

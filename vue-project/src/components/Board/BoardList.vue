@@ -56,7 +56,7 @@ console.log(articles.value);
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">글목록</mark>
+          <mark class="sky">공지사항</mark>
         </h2>
       </div>
       <div class="col-lg-10">

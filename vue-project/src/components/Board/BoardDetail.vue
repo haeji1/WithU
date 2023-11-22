@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import CommentWrite from "../comment/CommentWrite.vue";
 // import BoardFormItem from "./item/BoardFormItem.vue";
 
 const route = useRoute();
@@ -14,27 +15,22 @@ const followurl = import.meta.env.VITE_FOLLOW_FOLLOW_API_URL;
 const user = JSON.parse(sessionStorage.getItem("user"));
 // const durl = import.meta.env.VITE_BOARD_DELETE_API_URL;
 
+const comment = ref({});
+
 // follow 유저 아이디 세팅
 const follow = ref({
   userId: "",
   followId: "",
 });
 
-onMounted(() => {
-  getArticle();
-  // console.log("article:" + route.params.subject);
-});
-
-const getArticle = () => {
-  console.log(route.params.articleno + "번글 얻으러 가자!!!");
-};
-
-const articles = ref([]);
-const comments = ref([]);
+const articles = ref({});
+const comments = ref({});
+// const comment = ref({});
 
 onMounted(() => {
   getArticles();
   getComment();
+  console.log(comment.value.articleno);
 });
 
 const getArticles = () => {
@@ -47,7 +43,9 @@ const getArticles = () => {
     .then(({ data }) => {
       console.log(data.resdata);
       articles.value = data.resdata;
-      console.log(articles.value);
+      console.log(articles.value.articleNo);
+      comment.value.articleNo = route.params.articleno;
+      comment.value.userId = user;
     })
     .catch((error) => {
       console.log(error);
@@ -92,6 +90,7 @@ function onDeleteArticle() {
       console.error(error);
     });
 }
+
 function getComment() {
   axios
     .get(`http://localhost:8080/spring/resboard/clist/${route.params.articleno}`)
@@ -99,8 +98,43 @@ function getComment() {
       comments.value = data.data.resdata;
       console.log(`${route.params.articleno}번 댓글 불러오기`);
       // console.log(data.data.resdata);
-      console.log(comments.value);
+      console.log(comments.value[0]);
       // router.push({ name: "article-list" });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function WriteComment() {
+  if (user === null) {
+    alert("로그인 해주세요");
+    router.push({ name: "login" });
+  } else {
+    axios
+      .post(`http://localhost:8080/spring/resboard/cwrite`, comment.value)
+      .then(({ data }) => {
+        console.log(comment.value);
+        alert("댓글이 등록되었습니다.");
+        router.push({ name: "article-view", params: { articleno: route.params.articleno } });
+        // router.push({ name: "article-view" });
+        comments.value.push(comment.value);
+        // router.push({ name: "article-view", params: { articleno: route.params.articleno } });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+
+function DeleteComment(commentNo) {
+  console.log(commentNo);
+  axios
+    .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
+    .then((response) => {
+      console.log(`Deleted post with ID ${commentNo}`);
+      alert("댓글이 삭제되었습니다");
+      router.push({ name: "article-list" });
     })
     .catch((error) => {
       console.error(error);
@@ -122,7 +156,10 @@ function getComment() {
       </p>
       <div class="col-lg-10 text-start">
         <div class="row my-2">
-          <h2 class="text-secondary px-5">{{ articles.subject }}. {{ articles.content }}</h2>
+          <h2 class="text-secondary px-5">
+            제목 : {{ articles.subject }}<br />
+            내용 : {{ articles.content }}
+          </h2>
         </div>
         <div class="divider mt-3 mb-3"></div>
         <div class="d-flex justify-content-end">
@@ -140,15 +177,21 @@ function getComment() {
           </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-8">
-          <div class="clearfix align-content-center"></div>
-        </div>
-        <!-- <div class="col-md-4 align-self-center text-end">댓글 : 17</div> -->
-        <div class="divider mb-3"></div>
-        <div class="text-secondary" v-for="comment in comments" :key="comment.articleNo">
-          작성자 : {{ comment.userId }} 댓글 : {{ comment.content }}
-        </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">댓글 등록</label>
+
+        <textarea class="form-control" v-model="comment.content" rows="3"></textarea>
+        <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="WriteComment">
+          댓글쓰기
+        </button>
+      </div>
+    </div>
+    <div class="mb-3"></div>
+    <div class="card" v-for="comment in comments" :key="comment.articleNo">
+      <h5 class="card-header">{{ comment.userId }}</h5>
+      <div class="card-body">
+        <h5 class="card-title">{{ comment.content }}</h5>
+        <a class="btn btn-primary" @click="() => DeleteComment(comment.commentNo)">댓글 삭제</a>
       </div>
     </div>
   </div>

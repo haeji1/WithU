@@ -26,7 +26,7 @@
 	</select>
 	<select id="insertComment" parameterType="comdto">
 		insert into
-		comment(articleno, userId, date, content)
+		comment(articleNo, userId, date, content)
 		values(#{articleNo},
 		#{userId},now(), #{content})
 	</select>
