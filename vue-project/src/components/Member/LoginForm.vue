@@ -20,7 +20,9 @@ const login = async function () {
     if (response.data.resmsg === "입력 성공") {
       console.log("bbb");
       sessionStorage.setItem("user", JSON.stringify(userInfo.value.userId));
-      router.push({ name: "index" });
+      router.push({ name: "index" }).then(() => {
+        window.location.reload();
+      });
     } else {
       console.log(response.data.resmsg);
     }

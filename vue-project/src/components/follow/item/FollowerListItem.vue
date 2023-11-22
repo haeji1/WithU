@@ -10,10 +10,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <tr class="text-center">
+  <!-- <tr class="text-center">
     <th scope="row">{{ props.follower.userId }}</th>
     <td class="text-center">
-      <!-- <router-link
+      </td>
+      </tr> -->
+  <!-- <router-link
           :to="{
             name: 'article-view',
             params: { articleno: props.article.articleNo },
@@ -22,10 +24,26 @@ onMounted(() => {
         >
           {{ props.article.subject }}
         </router-link> -->
-    </td>
-    <!-- <td>{{ props.article.userId }}</td>
+
+  <!-- <td>{{ props.article.userId }}</td>
       <td>{{ props.article.registerTime }}</td> -->
-  </tr>
+
+  <!-- <div class="card w-50">
+    <div class="card-body">
+      <h5 class="card-title">{{ props.follower.userId }}</h5>
+      <p class="card-text"></p>
+      <a href="#" class="btn btn-primary">Button</a>
+    </div>
+  </div> -->
+  <div class="mb-3 d-flex justify-content-center">
+    <div class="card w-50">
+      <div class="card-body">
+        <h5 class="card-title">{{ props.follower.userId }}</h5>
+        <p class="card-text"></p>
+        <!-- <a href="#" class="btn btn-primary">Button</a> -->
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>

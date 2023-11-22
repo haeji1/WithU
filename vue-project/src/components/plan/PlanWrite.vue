@@ -4,222 +4,215 @@ import { listSido, listGugun } from "@/api/map";
 import VSelect from "@/components/common/VSelect.vue";
 const touristSpotData = ref([]);
 const initMap = (initialCenter) => {
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-    var mapContainer = document.getElementById("map");
-    console.log(initialCenter);
-    var y = 37.566826;
-    var x = 126.9786567;
-    if (initialCenter) {
-        x = initialCenter.La;
-        y = initialCenter.Ma;
+  var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+  var mapContainer = document.getElementById("map");
+  console.log(initialCenter);
+  var y = 37.566826;
+  var x = 126.9786567;
+  if (initialCenter) {
+    x = initialCenter.La;
+    y = initialCenter.Ma;
+  }
+  if (!initialCenter) {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        (x = position.coords.latitude), (y = position.coords.longitude);
+      });
+    } else {
+      console.log("bbb");
+      x = 37.566826;
+      y = 126.9786567;
     }
-    if (!initialCenter) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                x = position.coords.latitude,
-                    y = position.coords.longitude;
-            }
-            )
-        }
-        else {
-            console.log("bbb")
-            x = 37.566826;
-            y = 126.9786567;
-        }
-    }
-    var mapOption = {
-        center: new kakao.maps.LatLng(y, x),
-        level: 3,
-    };
+  }
+  var mapOption = {
+    center: new kakao.maps.LatLng(y, x),
+    level: 3,
+  };
 
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    var ps = new kakao.maps.services.Places(map);
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+  var ps = new kakao.maps.services.Places(map);
 
-    function placesSearchCB(data, status, pagination) {
-        touristSpotData.value = [];
-        if (status === kakao.maps.services.Status.OK) {
-            for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
-                touristSpotData.value.push(data[i]);
-                // console.log(touristSpotData);
-                displayMarker(data[i]);
-            }
-        }
+  function placesSearchCB(data, status, pagination) {
+    touristSpotData.value = [];
+    if (status === kakao.maps.services.Status.OK) {
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i]);
+        touristSpotData.value.push(data[i]);
+        // console.log(touristSpotData);
+        displayMarker(data[i]);
+      }
     }
-    function displayMarker(place) {
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: new kakao.maps.LatLng(place.y, place.x),
-        });
-        console.log(marker);
-        kakao.maps.event.addListener(marker, "click", function () {
-            infowindow.setContent(
-                '<div style="padding:5px;font-size:12px;">' +
-                place.place_name +
-                "</div>"
-            );
-            infowindow.open(map, marker);
-        });
-    }
-    // Function to update the marker when a card is clicked
-
-    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
-    kakao.maps.event.addListener(map, "idle", function () {
-        ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+  }
+  function displayMarker(place) {
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: new kakao.maps.LatLng(place.y, place.x),
     });
+    console.log(marker);
+    kakao.maps.event.addListener(marker, "click", function () {
+      infowindow.setContent(
+        '<div style="padding:5px;font-size:12px;">' + place.place_name + "</div>"
+      );
+      infowindow.open(map, marker);
+    });
+  }
+  // Function to update the marker when a card is clicked
 
-    // var mapTypeControl = new kakao.maps.MapTypeControl();
-    // map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+  ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+  kakao.maps.event.addListener(map, "idle", function () {
+    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true });
+  });
 
-    // var zoomControl = new kakao.maps.ZoomControl();
-    // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+  // var mapTypeControl = new kakao.maps.MapTypeControl();
+  // map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
+  // var zoomControl = new kakao.maps.ZoomControl();
+  // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 };
 onMounted(() => {
-    // window.kakao && window.kakao.maps ? initMap() : addKakaoMapScript();
-    addKakaoMapScript();
-    getSidoList();
+  // window.kakao && window.kakao.maps ? initMap() : addKakaoMapScript();
+  addKakaoMapScript();
+  getSidoList();
 });
 
 const addKakaoMapScript = () => {
-    const script = document.createElement("script");
-    script.onload = () => kakao.maps.load(initMap);
-    script.src =
-        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8a44173e88d925b5f5defa1a5db14942";
-    document.head.appendChild(script);
+  const script = document.createElement("script");
+  script.onload = () => kakao.maps.load(initMap);
+  script.src =
+    "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8a44173e88d925b5f5defa1a5db14942";
+  document.head.appendChild(script);
 };
-
 
 // const serviceKey = import.meta.env.VITE_OPEN_API_SERVICE_KEY;
 const param = ref({
-    zscode: "", // or provide default values as needed
+  zscode: "", // or provide default values as needed
 });
 
 const sidoList = ref([]);
 const gugunList = ref([{ text: "구군선택", value: "" }]);
 const totalsidogugun = ref("");
 
-
 const getSidoList = () => {
-    listSido(
-        ({ data }) => {
-            let options = [];
-            options.push({ text: "시도선택", value: "" });
-            data.forEach((sido) => {
-                options.push({ text: sido.sidoName, value: sido.sidoCode });
-            });
-            sidoList.value = options;
-        },
-        (err) => {
-            console.log(err);
-        }
-    );
+  listSido(
+    ({ data }) => {
+      let options = [];
+      options.push({ text: "시도선택", value: "" });
+      data.forEach((sido) => {
+        options.push({ text: sido.sidoName, value: sido.sidoCode });
+      });
+      sidoList.value = options;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 };
 const onChangeSido = (val) => {
-    // 찾고자 하는 시/도의 객체를 찾음
-    const selectedSido = sidoList.value.find((item) => item.value === val);
-    listGugun(
-        { sido: val },
-        ({ data }) => {
-            let options = [];
-            options.push({ text: "구군선택", value: "" });
-            data.forEach((gugun) => {
-                options.push({ text: gugun.gugunName, value: gugun.gugunCode });
-                // 선택된 시/도의 text를 가져와서 출력
-                totalsidogugun.value = selectedSido.text;
-            });
-            // console.log(sidoList.value);
-            gugunList.value = options;
-        },
-        (err) => {
-            console.log(err);
-        }
-    );
+  // 찾고자 하는 시/도의 객체를 찾음
+  const selectedSido = sidoList.value.find((item) => item.value === val);
+  listGugun(
+    { sido: val },
+    ({ data }) => {
+      let options = [];
+      options.push({ text: "구군선택", value: "" });
+      data.forEach((gugun) => {
+        options.push({ text: gugun.gugunName, value: gugun.gugunCode });
+        // 선택된 시/도의 text를 가져와서 출력
+        totalsidogugun.value = selectedSido.text;
+      });
+      // console.log(sidoList.value);
+      gugunList.value = options;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 };
 
 const onChangeGugun = (val) => {
-    // param.value.zscode = val;
-    // console.log(param.value);
-    const selectedGugun = gugunList.value.find((item) => item.value === val);
-    if (selectedGugun) {
-        var tmp = totalsidogugun.value + " " + selectedGugun.text;
-        // totalsidogugun.value += " " + selectedGugun.text;
-        // 주소 검색을 통해 좌표 획득
-        console.log(totalsidogugun);
-        var geocoder = new window.kakao.maps.services.Geocoder();
-        // geocoder.addressSearch(totalsidogugun.value, function (result, status) {
-        geocoder.addressSearch(tmp, function (result, status) {
-            if (status === window.kakao.maps.services.Status.OK) {
-                // 좌표를 획득한 경우, 지도 이동
-                var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
-                initMap(coords);
-            } else {
-                console.log("Geocoder failed due to: " + status);
-            }
-        });
-    }
+  // param.value.zscode = val;
+  // console.log(param.value);
+  const selectedGugun = gugunList.value.find((item) => item.value === val);
+  if (selectedGugun) {
+    var tmp = totalsidogugun.value + " " + selectedGugun.text;
+    // totalsidogugun.value += " " + selectedGugun.text;
+    // 주소 검색을 통해 좌표 획득
+    console.log(totalsidogugun);
+    var geocoder = new window.kakao.maps.services.Geocoder();
+    // geocoder.addressSearch(totalsidogugun.value, function (result, status) {
+    geocoder.addressSearch(tmp, function (result, status) {
+      if (status === window.kakao.maps.services.Status.OK) {
+        // 좌표를 획득한 경우, 지도 이동
+        var coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
+        initMap(coords);
+      } else {
+        console.log("Geocoder failed due to: " + status);
+      }
+    });
+  }
 };
 </script>
 
 <template>
-    <div class="pt-4 container-fluid">
-        <div class="text-center mb-4 col">
-            <h2 class="text-secondary">나의 여행계획</h2>
-            <div class="mt-4 container-fluid">
-                <div class="row">
-                    <div class="border col-sm-12 col-md-12 col-lg-2 col-2">
-                        <div class="row text-center mb-1 mt-3">
-                            <div class="font-weight-bold col">관광지를 추가하세요!!!</div>
-                        </div>
-                        <div class="alist overflow-auto" style="max-height: 400px; overflow-y: auto;">
-                            <div v-for="spot in touristSpotData" :key="spot.id" class="col-md-3">
-                                <a :href="spot.place_url" target="_blank">
-                                    <div class=" card mb-3">
-                                        <div class="card-body">
-                                            <h3 class="card-title">{{ spot.place_name }}</h3>
-                                            <p class="card-text">{{ spot.address_name }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-8 col-8">
-                        <div class="row mb-2">
-                            <div class="col d-flex flex-row-reverse">
-                                <VSelect :selectOption="sidoList" @onKeySelect="onChangeSido" />
-                            </div>
-                            <div class="col">
-                                <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
-                            </div>
-                        </div>
-                        <div id="map" class="map"></div>
-                    </div>
-                    <div id="attraction-list" class="border pt-3 font-weight-bold col-sm-12 col-md-12 col-lg-2 col-2">
-                        <h5>
-                            나의 여행 코스!!!
-                        </h5>
-                        <h6>원하는 장소를 검색해 주가하세요</h6>
-                    </div>
-                </div>
+  <div class="pt-4 container-fluid">
+    <div class="text-center mb-4 col">
+      <h2 class="text-secondary">나의 여행계획</h2>
+      <div class="mt-4 container-fluid">
+        <div class="row">
+          <div class="border col-sm-12 col-md-12 col-lg-2 col-2">
+            <div class="row text-center mb-1 mt-3">
+              <div class="font-weight-bold col">관광지를 추가하세요!!!</div>
             </div>
+            <div class="alist overflow-auto" style="max-height: 400px; overflow-y: auto">
+              <div v-for="spot in touristSpotData" :key="spot.id" class="col-md-3">
+                <a :href="spot.place_url" target="_blank">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h3 class="card-title">{{ spot.place_name }}</h3>
+                      <p class="card-text">{{ spot.address_name }}</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-8 col-8">
+            <div class="row mb-2">
+              <div class="col d-flex flex-row-reverse">
+                <VSelect :selectOption="sidoList" @onKeySelect="onChangeSido" />
+              </div>
+              <div class="col">
+                <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
+              </div>
+            </div>
+            <div id="map" class="map"></div>
+          </div>
+          <div
+            id="attraction-list"
+            class="border pt-3 font-weight-bold col-sm-12 col-md-12 col-lg-2 col-2"
+          >
+            <h5>나의 여행 코스!!!</h5>
+            <h6>원하는 장소를 검색해 주가하세요</h6>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
 .map {
-    width: 100%;
-    height: 400px;
+  width: 100%;
+  height: 400px;
 }
 
 alist .card-title {
-    font-size: 18px;
-    /* 원하는 크기로 조절 */
+  font-size: 18px;
+  /* 원하는 크기로 조절 */
 }
 
 .alist .card-text {
-    font-size: 14px;
-    /* 원하는 크기로 조절 */
+  font-size: 14px;
+  /* 원하는 크기로 조절 */
 }
 </style>

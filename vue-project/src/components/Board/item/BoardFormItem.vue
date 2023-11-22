@@ -133,7 +133,10 @@ function writeArticle() {
 function updateArticle() {
   console.log(articles.value.articleNo + "번글 수정하자!!");
   axios
-    .put(`http://localhost:8080/spring/resboard/modify/${articles.value.articleNo}`, article.value)
+    .put(
+      `http://192.168.205.83:8080/spring/resboard/modify/${articles.value.articleNo}`,
+      article.value
+    )
     .then(({ data }) => {
       console.log(data.value);
       router.push({ name: "article-list" });

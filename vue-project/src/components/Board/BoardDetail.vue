@@ -63,24 +63,29 @@ function moveModify() {
 }
 
 function onFollowUser() {
-  alert(`${articles.value.userId} 님을 팔로우합니다.`);
-  follow.value.userId = user;
-  follow.value.followId = articles.value.userId;
-  axios
-    .post(followurl, follow.value)
-    .then((response) => {
-      console.log(response);
-      router.push({ name: "following" });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (user === articles.value.userId) {
+    alert("자기 자신을 팔로우 할 수 없습니다.");
+  } else {
+    alert(`${articles.value.userId} 님을 팔로우합니다.`);
+    follow.value.userId = user;
+    follow.value.followId = articles.value.userId;
+    console.log(follow.value.length);
+    axios
+      .post(followurl, follow.value)
+      .then((response) => {
+        console.log(response);
+        router.push({ name: "following" });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 }
 
 function onDeleteArticle() {
   console.log(route.params.articleno + "번글 삭제하러 가자!!!");
   axios
-    .delete(`http://localhost:8080/spring/resboard/delete/${route.params.articleno}`)
+    .delete(`http://192.168.205.83:8080/spring/resboard/delete/${route.params.articleno}`)
     .then((response) => {
       console.log(`Deleted post with ID ${route.params.articleno}`);
       alert("삭제되었습니다");
@@ -93,7 +98,7 @@ function onDeleteArticle() {
 
 function getComment() {
   axios
-    .get(`http://localhost:8080/spring/resboard/clist/${route.params.articleno}`)
+    .get(`http://192.168.205.83:8080/spring/resboard/clist/${route.params.articleno}`)
     .then((data) => {
       comments.value = data.data.resdata;
       console.log(`${route.params.articleno}번 댓글 불러오기`);
@@ -112,13 +117,15 @@ function WriteComment() {
     router.push({ name: "login" });
   } else {
     axios
-      .post(`http://localhost:8080/spring/resboard/cwrite`, comment.value)
+      .post(`http://192.168.205.83:8080/spring/resboard/cwrite`, comment.value)
       .then(({ data }) => {
         console.log(comment.value);
         alert("댓글이 등록되었습니다.");
         router.push({ name: "article-view", params: { articleno: route.params.articleno } });
         // router.push({ name: "article-view" });
-        comments.value.push(comment.value);
+        comments.value.push(comment.value).then(() => {
+          window.location.reload();
+        });
         // router.push({ name: "article-view", params: { articleno: route.params.articleno } });
       })
       .catch((error) => {
@@ -130,11 +137,13 @@ function WriteComment() {
 function DeleteComment(commentNo) {
   console.log(commentNo);
   axios
-    .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
+    .delete(`http://192.168.205.83:8080/spring/resboard/cdelete/${commentNo}`)
     .then((response) => {
       console.log(`Deleted post with ID ${commentNo}`);
       alert("댓글이 삭제되었습니다");
-      router.push({ name: "article-list" });
+      router.push({ name: "article-list" }).then(() => {
+        window.location.reload();
+      });
     })
     .catch((error) => {
       console.error(error);

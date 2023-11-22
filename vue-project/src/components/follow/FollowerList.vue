@@ -55,7 +55,7 @@ const getFollowers = () => {
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">팔로워</mark>
+          <mark class="sky">{{ followers.length }}명의 팔로워</mark>
         </h2>
       </div>
       <!-- <div class="col-lg-10">
@@ -84,11 +84,13 @@ const getFollowers = () => {
         <thead>
           <tr class="text-center">
             <th scope="col">팔로워 아이디</th>
+            <br />
             <!-- <th scope="col">아이디</th>
             <th scope="col">닉네임</th> -->
           </tr>
         </thead>
         <tbody>
+          <br />
           <template v-for="follower in followers">
             <FollowerListItem :follower="follower"> </FollowerListItem>
           </template>
@@ -101,6 +103,7 @@ const getFollowers = () => {
         @pageChange="onPageChange"
       ></PageNavigation> -->
   </div>
+
   <!-- </div> -->
 </template>
 

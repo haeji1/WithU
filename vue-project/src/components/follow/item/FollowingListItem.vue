@@ -31,6 +31,14 @@ onMounted(() => {
     <!-- <td>{{ props.article.userId }}</td>
       <td>{{ props.article.registerTime }}</td> -->
   </tr>
+
+  <!-- <div class="card w-50">
+    <div class="card-body">
+      <h5 class="card-title">{{ props.following.followId }}</h5>
+      <p class="card-text"></p>
+      <a href="#" class="btn btn-primary">Button</a>
+    </div>
+  </div> -->
 </template>
 
 <style scoped>

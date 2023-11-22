@@ -23,7 +23,7 @@ onMounted(() => {
 
 function WriteComment() {
   axios
-    .post(`http://localhost:8080/spring/resboard/cwrite`, comment.value)
+    .post(`http://192.168.205.83:8080/spring/resboard/cwrite`, comment.value)
     .then(({ data }) => {
       console.log(comment.value);
       alert("댓글이 등록되었습니다.");

@@ -21,11 +21,13 @@ console.log(user);
 const logout = async function () {
   try {
     // 로그아웃을 서버로 요청
-    await axios.get("http://localhost:8080/spring/resmem/logout");
+    await axios.get("http://192.168.205.83:8080/spring/resmem/logout");
     console.log("logout성공");
     // 로그아웃 후 로그인 페이지로 리다이렉트
     sessionStorage.clear();
-    router.push({ name: "login" });
+    router.push({ name: "login" }).then(() => {
+      window.location.reload();
+    });
   } catch (error) {
     console.error("Error during logout:", error);
   }
