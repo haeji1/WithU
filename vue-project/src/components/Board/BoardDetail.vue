@@ -124,14 +124,14 @@ function onDeleteArticle() {
         <div class="col-md-8">
           <div class="clearfix align-content-center">
             <p>
-              <span class="fw-bold">안효인</span> <br />
+              <!-- <span class="fw-bold">안효인</span> <br /> -->
               <span class="text-secondary fw-light">
                 {{ articles.content }}1 조회 : {{ articles.hit }}
               </span>
             </p>
           </div>
         </div>
-        <div class="col-md-4 align-self-center text-end">댓글 : 17</div>
+        <!-- <div class="col-md-4 align-self-center text-end">댓글 : 17</div> -->
         <div class="divider mb-3"></div>
         <div class="text-secondary">
           {{ articles.content }}
