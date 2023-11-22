@@ -5,6 +5,8 @@ const props = defineProps({ article: Object });
 onMounted(() => {
   // console.log("item: " + props.article.content);
   // console.log(props.article.userId);
+  console.log(props.article.hit);
+
 });
 </script>
 
@@ -23,6 +25,7 @@ onMounted(() => {
       </router-link>
     </td>
     <td>{{ props.article.userId }}</td>
+    <td>{{ props.article.hit }}</td>
     <td>{{ props.article.registerTime }}</td>
   </tr>
 </template>

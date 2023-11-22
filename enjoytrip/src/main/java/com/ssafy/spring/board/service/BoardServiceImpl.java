@@ -65,4 +65,14 @@ public class BoardServiceImpl implements BoardService{
 		return repo.followingboard(followId);
 	}
 
+	@Override
+	public int updateHit(String articleNo) {
+		return repo.updateHit(articleNo);
+	}
+
+	@Override
+	public List<BoardDto> listpop() {
+		return repo.listpop();
+	}
+
 }
