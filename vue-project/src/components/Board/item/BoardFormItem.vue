@@ -14,7 +14,6 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 
 const url = import.meta.env.VITE_BOARD_WRITE_API_URL;
 const geturl = import.meta.env.VITE_BOARD_VIEW_API_URL;
-const updateurl = import.meta.env.VITE_BOARD_UPDATE_API_URL;
 
 const article = ref({
   articleNo: 0,
@@ -134,10 +133,7 @@ function writeArticle() {
 function updateArticle() {
   console.log(articles.value.articleNo + "번글 수정하자!!");
   axios
-    .put(
-      `http://localhost:8080/spring/resboard/modify/${articles.value.articleNo}`,
-      article.value
-    )
+    .put(`http://localhost:8080/spring/resboard/modify/${articles.value.articleNo}`, article.value)
     .then(({ data }) => {
       console.log(data.value);
       router.push({ name: "article-list" });
@@ -156,42 +152,20 @@ const moveList = () => {
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="subject" class="form-label">제목 : </label>
-      <input
-        type="text"
-        class="form-control"
-        v-model="article.subject"
-        placeholder="제목..."
-      />
+      <input type="text" class="form-control" v-model="article.subject" placeholder="제목..." />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea
-        class="form-control"
-        v-model="article.content"
-        rows="10"
-      ></textarea>
+      <textarea class="form-control" v-model="article.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
-      <button
-        type="submit"
-        class="btn btn-outline-primary mb-3"
-        v-if="type === 'regist'"
-      >
+      <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
         글작성
       </button>
-      <button
-        type="submit"
-        class="btn btn-outline-success mb-3"
-        v-else
-        @click="updateArticle"
-      >
+      <button type="submit" class="btn btn-outline-success mb-3" v-else @click="updateArticle">
         글수정
       </button>
-      <button
-        type="button"
-        class="btn btn-outline-danger mb-3 ms-1"
-        @click="moveList"
-      >
+      <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="moveList">
         목록으로이동...
       </button>
     </div>

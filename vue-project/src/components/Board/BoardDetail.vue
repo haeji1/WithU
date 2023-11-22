@@ -30,9 +30,11 @@ const getArticle = () => {
 };
 
 const articles = ref([]);
+const comments = ref([]);
 
 onMounted(() => {
   getArticles();
+  getComment();
 });
 
 const getArticles = () => {
@@ -90,6 +92,20 @@ function onDeleteArticle() {
       console.error(error);
     });
 }
+function getComment() {
+  axios
+    .get(`http://localhost:8080/spring/resboard/clist/${route.params.articleno}`)
+    .then((data) => {
+      comments.value = data.data.resdata;
+      console.log(`${route.params.articleno}번 댓글 불러오기`);
+      // console.log(data.data.resdata);
+      console.log(comments.value);
+      // router.push({ name: "article-list" });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 </script>
 
 <template>
@@ -100,9 +116,13 @@ function onDeleteArticle() {
           <mark class="sky">글보기</mark>
         </h2>
       </div>
+      <p>
+        <span class="fw-bold"> 조회수 : {{ articles.hit }} </span> <br />
+        <span class="text-secondary fw-light"> 작성자 : {{ articles.userId }}</span>
+      </p>
       <div class="col-lg-10 text-start">
         <div class="row my-2">
-          <h2 class="text-secondary px-5">{{ articles.articleNo }}. {{ articles.subject }}</h2>
+          <h2 class="text-secondary px-5">{{ articles.subject }}. {{ articles.content }}</h2>
         </div>
         <div class="divider mt-3 mb-3"></div>
         <div class="d-flex justify-content-end">
@@ -123,22 +143,16 @@ function onDeleteArticle() {
       <div class="row">
         <div class="col-md-8">
           <div class="clearfix align-content-center">
-            <img
+            <!-- <img
               class="avatar me-2 float-md-start bg-light p-2"
               src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
-            />
-            <p>
-              <span class="fw-bold">안효인</span> <br />
-              <span class="text-secondary fw-light">
-                {{ articles.registerTime }}1 조회 : {{ articles.hit }}
-              </span>
-            </p>
+            /> -->
           </div>
         </div>
-        <div class="col-md-4 align-self-center text-end">댓글 : 17</div>
+        <!-- <div class="col-md-4 align-self-center text-end">댓글 : 17</div> -->
         <div class="divider mb-3"></div>
-        <div class="text-secondary">
-          {{ articles.content }}
+        <div class="text-secondary" v-for="comment in comments" :key="comment.articleNo">
+          작성자 : {{ comment.userId }} 댓글 : {{ comment.content }}
         </div>
       </div>
     </div>

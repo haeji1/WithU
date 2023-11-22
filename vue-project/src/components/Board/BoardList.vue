@@ -24,7 +24,7 @@ const getArticles = () => {
       // console.log(data.resdata);
       // console.log(data);
       articles.value = data.resdata;
-      console.log(articles.value);
+      // console.log(articles.value);
     })
     .catch((error) => {
       console.log(error);
@@ -92,7 +92,8 @@ console.log(articles.value);
             </tr>
           </thead>
           <tbody>
-              <BoardListItem v-for="article in articles" :key = "article.articleNo" :article="article"> </BoardListItem>
+            <BoardListItem v-for="article in articles" :key="article.articleNo" :article="article">
+            </BoardListItem>
           </tbody>
         </table>
       </div>
