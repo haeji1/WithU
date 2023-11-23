@@ -22,6 +22,7 @@ const follow = ref({
 });
 
 const articles = ref({});
+const trips = ref([]);
 // const comment = ref({});
 
 onMounted(() => {
@@ -39,7 +40,8 @@ const getArticles = () => {
         .then(({ data }) => {
             console.log(data.resdata);
             articles.value = data.resdata;
-            console.log(articles.value.articleNo);
+            trips.value = data.restravel;
+            console.log(trips.value);
             // comment.value.articleNo = route.params.articleno;
             // comment.value.userId = user;
         })
@@ -86,44 +88,34 @@ function onFollowUser() {
 //             console.error(error);
 //         });
 // }
+
+
 </script>
 
 <template>
-    <div class="container">
-        {{ articles }}
-        <!-- <div class="row justify-content-center">
-                                                <div class="col-lg-10">
-                                                    <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-                                                        <mark class="sky">글보기</mark>
-                                                    </h2>
-                                                </div>
-                                                <p>
-                                                    <span class="fw-bold"> 조회수 : {{ articles.hit }} </span> <br />
-                                                    <span class="text-secondary fw-light"> 작성자 : {{ articles.userId }}</span>
-                                                </p>
-                                                <div class="col-lg-10 text-start">
-                                                    <div class="row my-2">
-                                                        <h2 class="text-secondary px-5">
-                                                            제목 : {{ articles.subject }}<br />
-                                                            내용 : {{ articles.content }}
-                                                        </h2>
-                                                    </div>
-                                                    <div class="divider mt-3 mb-3"></div>
-                                                    <div class="d-flex justify-content-end">
-                                                        <button type="button" class="btn btn-outline-primary mb-3" @click="moveList">
-                                                            글목록
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-success mb-3 ms-1" @click="moveModify">
-                                                            글수정
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeleteArticle">
-                                                            글삭제
-                                                        </button>
-                                                        <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onFollowUser">
-                                                            팔로우하기
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="border rounded p-4">
+                    <h2>{{ articles.subject }}</h2>
+                    <div class="d-flex justify-content-between">
+                        <p>
+                            <strong>작성자:</strong>
+                            <span class="text-end">{{ articles.userId }}</span>
+                        </p>
+                        <p>
+                            <strong>작성일:</strong>
+                            <span class="text-end">{{ articles.registerTime }}</span>
+                        </p>
+                    </div>
+                    <p>{{ articles.content }}</p>
+                    <div class="mt-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-primary me-2" @click="moveList">글 목록</button>
+                        <!-- <button type="button" class="btn btn-outline-danger me-2" @click="onDeleteArticle">글 삭제</button> -->
+                        <button type="button" class="btn btn-outline-danger" @click="onFollowUser">팔로우하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

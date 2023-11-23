@@ -116,9 +116,9 @@ public class RestPlanController {
 			System.out.println(res);
 //			List<CommentDto> comment = service.getComment(articleNo);
 			System.out.println(res);
-//			List<TravelDto> travel = service.getTravelInfo(planNo);
+			List<TravelDto> travel = service.getTravelInfo(planNo);
 			map.put("resmsg", "출력 성공");
-//			map.put("restravel", travel);
+			map.put("restravel", travel);
 			map.put("resdata", res);
 		} catch (Exception e) {
 			e.printStackTrace();
