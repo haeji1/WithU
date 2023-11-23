@@ -103,10 +103,10 @@ const moveWrite = () => {
                 </table>
             </div>
             <!-- <PageNavigation
-                                                                                                                                                                                                                                                                                        :current-page="currentPage"
-                                                                                                                                                                                                                                                                                        :total-page="totalPage"
-                                                                                                                                                                                                                                                                                        @pageChange="onPageChange"
-                                                                                                                                                                                                                                                                                        ></PageNavigation> -->
+                                                                                                                                                                                                                                                                                :current-page="currentPage"
+                                                                                                                                                                                                                                                                                :total-page="totalPage"
+                                                                                                                                                                                                                                                                                @pageChange="onPageChange"
+                                                                                                                                                                                                                                                                                ></PageNavigation> -->
         </div>
     </div>
 </template>

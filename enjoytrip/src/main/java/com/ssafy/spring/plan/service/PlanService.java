@@ -25,12 +25,10 @@ public class PlanService{
 	}
 	
 	public int Twrite(TravelDto dto) {
-		// TODO Auto-generated method stub
 		return repo.Twrite(dto);
 	}
 
 	public int getPlanNo() {
-		// TODO Auto-generated method stub
 		return repo.getPlanNo();
 	}
 	public List<PlanDto> list(){
@@ -38,5 +36,9 @@ public class PlanService{
 	}
 	public PlanDto view(int planNo) {
 		return repo.view(planNo);
+	}
+	
+	public List<TravelDto> getTravelInfo(int planNo){
+		return repo.getTravelInfo(planNo);
 	}
 }
