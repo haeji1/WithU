@@ -8,7 +8,7 @@
         <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
       </div>
     </div>
-    <div class="col-md-3" v-for="(site, index) in sites" :key="index">
+    <!-- <div class="col-md-3" v-for="(site, index) in sites" :key="index">
       <div class="card mb-3">
         <img v-bind:src="site.image" class="card-img-top" alt="Image 1" />
         <div class="card-body">
@@ -16,7 +16,7 @@
           <p class="card-text">{{ site.content }}</p>
         </div>
       </div>
-    </div>
+    </div> -->
     <div id="map" class="map"></div>
     <br />
     <br />
@@ -98,11 +98,8 @@ const initMap = (initialCenter) => {
     touristSpotData.value = [];
     if (status === kakao.maps.services.Status.OK) {
       for (var i = 0; i < data.length; i++) {
-        console.log(data[i]);
-        console.log(data[i].x);
-        console.log(data[i].y);
         touristSpotData.value.push(data[i]);
-        console.log(touristSpotData);
+        // console.log(touristSpotData);
         // console.log(touristSpotData.value.x);
         displayMarker(data[i]);
       }
@@ -113,7 +110,6 @@ const initMap = (initialCenter) => {
       map: map,
       position: new kakao.maps.LatLng(place.y, place.x),
     });
-    console.log(marker);
     kakao.maps.event.addListener(marker, "click", function () {
       infowindow.setContent(
         '<div style="padding:5px;font-size:12px;">' + place.place_name + "</div>"
@@ -125,7 +121,7 @@ const initMap = (initialCenter) => {
 
   ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 3 });
   kakao.maps.event.addListener(map, "idle", function () {
-    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 15, page: 3 });
+    ps.categorySearch("AT4", placesSearchCB, { useMapBounds: true, size: 15 });
   });
 
   // var mapTypeControl = new kakao.maps.MapTypeControl();

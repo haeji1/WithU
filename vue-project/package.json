@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^1.6.1",
     "bootstrap": "^5.3.1",
+    "bootstrap-icons": "^1.11.2",
     "lottie-web": "^5.12.2",
     "pinia": "^2.1.7",
     "swiper": "^11.0.4",
