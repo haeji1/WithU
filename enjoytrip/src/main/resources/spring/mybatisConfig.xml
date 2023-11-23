@@ -27,4 +27,6 @@
 		<mapper resource="mapper/followMapper.xml"/>
 		<mapper resource="mapper/planMapper.xml"/>
 	</mappers>
+
+	 
 </configuration>

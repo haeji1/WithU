@@ -55,10 +55,20 @@ public class RestPlanController {
 		try {
 			int planNo = service.getPlanNo();
 			System.out.println("가져온 planNo : " + planNo);
+			System.out.println("dotoList개수: " + dtoList.size());
 			for (int i = 0; i < dtoList.size(); ++i) {
+				TravelDto tmp = new TravelDto();
+				tmp.setAddress_name(dtoList.get(i).getAddress_name());
+				tmp.setPhone(dtoList.get(i).getPhone());
+				tmp.setPlace_name(dtoList.get(i).getPlace_name());
+				tmp.setX(dtoList.get(i).getX());
+				tmp.setY(dtoList.get(i).getY());
+				tmp.setPlace_url(dtoList.get(i).getPlace_url());
+				tmp.setPlanNo(planNo);
 				dtoList.get(i).setPlanNo(planNo + 1);
 				System.out.println("list들 확인 >> dtoList[" + i + "] : " + dtoList.get(i));
-				int res = service.Twrite(dtoList.get(i));
+				System.out.println(tmp);
+				int res = service.Twrite(tmp);
 			}
 			System.out.println("에러때문에 여기 못오겠지???");
 			map.put("resmsg", "입력 성공");
