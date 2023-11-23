@@ -13,6 +13,11 @@
 		travel(planNo, address_name, phone, place_name, place_url, x, y)
 		values(#{planNo}, #{address_name}, #{phone , jdbcType=VARCHAR}, #{place_name}, #{place_url}, #{x}, #{y})
 	</insert>
+<!-- 	<select id="getAutoInc" resultType="int"> -->
+<!-- 		select auto_increment -->
+<!-- 		from information_schema.tables -->
+<!-- 		where table_schema='enjoytrip' and table_name = 'plan'; -->
+<!-- 	</select> -->
 	<select id="getAutoInc" resultType="int">
 		select auto_increment
 		from information_schema.tables

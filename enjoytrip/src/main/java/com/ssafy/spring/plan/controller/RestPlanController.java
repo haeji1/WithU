@@ -69,8 +69,11 @@ public class RestPlanController {
 				System.out.println("list들 확인 >> dtoList[" + i + "] : " + dtoList.get(i));
 				System.out.println(tmp);
 				int res = service.Twrite(tmp);
+				if (res == 0) {
+					System.out.println("service.Twrite(tmp)가 0을 리턴하는데??");
+				}
 			}
-			System.out.println("에러때문에 여기 못오겠지???");
+			System.out.println("성공 했다 ㅋㅋ");
 			map.put("resmsg", "입력 성공");
 //			map.put("resdata", res);
 		} catch (Exception e) {
