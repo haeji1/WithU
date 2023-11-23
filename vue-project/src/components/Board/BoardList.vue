@@ -66,7 +66,7 @@ console.log(articles.value);
               글쓰기
             </button>
           </div>
-          <div class="col-md-5 offset-5">
+          <!-- <div class="col-md-5 offset-5">
             <form class="d-flex">
               <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
               <div class="input-group input-group-sm">
@@ -79,7 +79,7 @@ console.log(articles.value);
                 <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
               </div>
             </form>
-          </div>
+          </div> -->
         </div>
         <table class="table table-hover">
           <thead>

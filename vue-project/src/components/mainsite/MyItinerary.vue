@@ -11,7 +11,7 @@ import MyItineraryItem from './MyItineraryItem.vue';
           <br>
           <span style="font-size: 15px; margin-left: 1%">나의 여행계획을 소개합니다.  </span>
           <br>
-          <a class="btn btn-primary" href="#" role="button" style="font-size: 15px; margin-left: 1%; margin-top: 1%;">더보기</a>
+          <a class="btn btn-light" href="/plan/plan-list" role="button" style="font-size: 15px; margin-left: 1%; margin-top: 1%; color: #e18aaa;">더보기</a>
         </div>
         <div class="container-fluid">
           <div class="row">
@@ -28,7 +28,7 @@ import MyItineraryItem from './MyItineraryItem.vue';
     padding-right: 20px;
   }
   section{
-    background-color: blanchedalmond;
+    background-color: #efcfd4;
     padding-bottom: 1%;
   }
 </style>

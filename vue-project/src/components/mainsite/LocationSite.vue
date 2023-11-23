@@ -18,8 +18,8 @@ import LocationSiteItem from './LocationSiteItem.vue';
       <br>
       <span style="font-size: 18px; margin-left: 1%">추천 관광지.</span>
       <br>
-      <a class="btn btn-primary" href="/map" role="button"
-        style="font-size: 15px; margin-left: 1%; margin-top: 1%;">더보기</a>
+      <a class="btn btn-light" href="/map" role="button" 
+        style="font-size: 15px; margin-left: 1%; margin-top: 1%; color: #e18aaa;">더보기</a>
     </div>
     <br />
     <div class="container-fluid">
@@ -37,7 +37,7 @@ import LocationSiteItem from './LocationSiteItem.vue';
 }
 
 section {
-  background-color: thistle;
+  background-color: #f5dce0;
   padding-bottom: 1%;
 }
 

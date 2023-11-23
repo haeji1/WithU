@@ -27,8 +27,7 @@ DROP TABLE IF EXISTS `follow`;
 CREATE TABLE `follow` (
   `userId` varchar(10) NOT NULL,
   `followId` varchar(30) NOT NULL,
-  PRIMARY KEY (`userId`,`followId`),
-  CONSTRAINT `follow_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `members` (`userId`)
+  PRIMARY KEY (`userId`,`followId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -62,7 +62,7 @@ const moveWrite = () => {
                             글쓰기
                         </button>
                     </div>
-                    <div class="col-md-5 offset-5">
+                    <!-- <div class="col-md-5 offset-5">
                         <form class="d-flex">
                             <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
                             <div class="input-group input-group-sm">
@@ -70,7 +70,7 @@ const moveWrite = () => {
                                 <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
                 <table class="table table-hover">
                     <thead>
@@ -84,8 +84,8 @@ const moveWrite = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" v-for="article in articles">
-                            <th scope="row">{{ article.planNo }}</th>
+                        <tr class="text-center" v-for="article in articles.slice(1)">
+                            <th scope="row">{{ article.planNo - 1 }}</th>
                             <td class="text-center">
                                 <router-link :to="{
                                     name: 'plan-view',

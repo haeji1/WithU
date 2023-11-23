@@ -13,11 +13,26 @@ import PopularPostItem from './PopularPostItem.vue';
     <br />
     <div class="container-fluid">
       <div class="row">
+        <div class="col-md-3">
+            <a>제목</a>
+        </div>
+        <div class="col-md-3">
+            <a>HITS</a>
+        </div>
+        <div class="col-md-3">
+            <a>아이디</a>
+        </div>
+        <div class="col-md-3">
+            <a>등록일</a>
+        </div>
+    </div>
+    <br>
+      <div class="row">
         <PopularPostItem></PopularPostItem>
       </div>
     </div>
-    <a class="btn btn-primary" href="/board/artcle-list" role="button"
-      style="font-size: 15px; margin-left: 1%; margin-top: 1%;">더보기</a>
+    <a class="btn btn-light" href="/board/article-list" role="button"
+      style="font-size: 15px; margin-left: 1%; margin-top: 1%; color: #e18aaa;">더보기</a>
   </section>
 </template>
 
@@ -28,7 +43,7 @@ import PopularPostItem from './PopularPostItem.vue';
 }
 
 section {
-  background-color: thistle;
+  background-color: #ecbdc4;
   padding-bottom: 1%;
 }
 </style>

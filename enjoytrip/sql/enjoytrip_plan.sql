@@ -5,7 +5,7 @@ select auto_increment
 from information_schema.tables
 where table_schema='enjoytrip' and table_name = 'plan';
 
-drop table plan;
+DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
   `planNo` int NOT NULL AUTO_INCREMENT,
   `userId` varchar(20) DEFAULT NULL,
