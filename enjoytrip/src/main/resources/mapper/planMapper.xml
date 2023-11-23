@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper	namespace="com.ssafy.spring.plan.repository.PlanRepository">
+	<insert id="write" parameterType="plandto">
+		insert into plan(userId, subject, content, registerTime, startDate, endDate)
+		values(#{userId}, #{subject}, #{content}, now(), #{startDate}, #{endDate})
+	</insert>
+	<insert id="travelwrite" parameterType="traveldto">
+		insert into
+		travel(planNo, addressName, phone, placeName, placeUrl, x, y)
+		values(#{planNo},# {addressName},#{phone}, #{placeName}, #{placeUrl}, #{x}, #{y})
+	</insert>
+	<select id="getAutoInc" resultType="int">
+		select auto_increment
+		from information_schema.tables
+		where table_schema='enjoytrip' and table_name = 'plan';
+	</select>
+</mapper>
