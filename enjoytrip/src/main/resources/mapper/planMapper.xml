@@ -19,8 +19,7 @@
 <!-- 		where table_schema='enjoytrip' and table_name = 'plan'; -->
 <!-- 	</select> -->
 	<select id="getAutoInc" resultType="int">
-		select auto_increment
-		from information_schema.tables
-		where table_schema='enjoytrip' and table_name = 'plan';
+		select max(planNo)
+from plan;
 	</select>
 </mapper>
