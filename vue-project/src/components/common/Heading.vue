@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+
 const userInfo = ref(null);
 const router = useRouter(); // Vue Router 추가
 
@@ -32,6 +33,19 @@ const logout = async function () {
     console.error("Error during logout:", error);
   }
 };
+
+function sharePage() {
+  window.Kakao.Share.sendCustom({
+    templateId: 101114,
+    // 카카오톡이 설치 되지 않았을때 마켓으로 이동
+    installTalk: true,
+  });
+}
+
+onMounted(() => {
+  const KAKAKO_API_KEY = "768f3c11c8418faef2861489f9b4b0eb";
+  window.Kakao.init(KAKAKO_API_KEY);
+});
 </script>
 
 <template>
@@ -64,9 +78,31 @@ const logout = async function () {
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item" v-if="user !== null">
-                <a class="nav-link" href="#">{{ user }}님 안녕하세요 </a>
+              <li class="nav-item dropdown" v-if="user !== null">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {{ user }}님 안녕하세요
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item"> <router-link to="/follower">팔로워</router-link></a>
+                  </li>
+                  <!-- <li><a class="dropdown-item">게시판</a></li> -->
+                  <li>
+                    <a class="dropdown-item"> <router-link to="/follwing">팔로잉</router-link></a>
+                  </li>
+                </ul>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click="sharePage()">페이지 공유하기 </a>
+              </li>
+
               <li class="nav-item">
                 <!-- <router-link to="/map"> 지역별여행지 </router-link> -->
                 <a class="nav-link active" aria-current="page"

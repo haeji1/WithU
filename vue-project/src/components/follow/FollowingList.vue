@@ -40,42 +40,13 @@ const getFollowings = () => {
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">{{ followings.length }}명을 팔로우합니다.</mark>
-        </h2>
-      </div>
-      <!-- <div class="col-lg-10">
-        <div class="row align-self-center mb-2">
-          <div class="col-md-2 text-start">
-            <button type="button" class="btn btn-outline-primary btn-sm" @click="moveWrite">
-              글쓰기
-            </button>
-          </div>
-          <div class="col-md-5 offset-5">
-            <form class="d-flex">
-              <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="param.word"
-                  placeholder="검색어..."
-                />
-                <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
-              </div>
-            </form>
-          </div>
-        </div> -->
       <table class="table table-hover">
         <thead>
-          <tr class="text-center">
-            <th scope="col">팔로잉 아이디</th>
-            <!-- <th scope="col">아이디</th>
-            <th scope="col">닉네임</th> -->
-          </tr>
+          <th scope="col">{{ followings.length }}명 팔로우</th>
+          <br />
         </thead>
         <tbody>
+          <br />
           <template v-for="following in followings">
             <FollowingListItem :following="following"> </FollowingListItem>
           </template>
@@ -91,4 +62,45 @@ const getFollowings = () => {
   <!-- </div> -->
 </template>
 
-<style scoped></style>
+<style scoped>
+.center-image {
+  text-align: center;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.page-header mark {
+  background-color: #87ceeb; /* 또는 원하는 색상으로 변경 가능 */
+  padding: 3px;
+}
+
+.action-buttons {
+  margin-top: 15px;
+}
+
+.action-buttons button {
+  margin-right: 10px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table thead th {
+  text-align: center;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+</style>

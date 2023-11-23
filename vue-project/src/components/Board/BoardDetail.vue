@@ -121,11 +121,12 @@ function WriteComment() {
       .then(({ data }) => {
         console.log(comment.value);
         alert("댓글이 등록되었습니다.");
-        router.push({ name: "article-view", params: { articleno: route.params.articleno } });
-        // router.push({ name: "article-view" });
-        comments.value.push(comment.value).then(() => {
-          window.location.reload();
-        });
+        router
+          .push({ name: "article-view", params: { articleno: route.params.articleno } })
+          // router.push({ name: "article-view" });
+          .then(() => {
+            window.location.reload();
+          });
         // router.push({ name: "article-view", params: { articleno: route.params.articleno } });
       })
       .catch((error) => {
@@ -141,9 +142,7 @@ function DeleteComment(commentNo) {
     .then((response) => {
       console.log(`Deleted post with ID ${commentNo}`);
       alert("댓글이 삭제되었습니다");
-      router.push({ name: "article-list" }).then(() => {
-        window.location.reload();
-      });
+      window.location.reload();
     })
     .catch((error) => {
       console.error(error);
