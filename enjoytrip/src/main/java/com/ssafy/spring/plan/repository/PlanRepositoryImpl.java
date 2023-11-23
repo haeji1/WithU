@@ -42,6 +42,11 @@ public class PlanRepositoryImpl implements PlanRepository{
 	public PlanDto view(int planNo) {
 		return session.selectOne(ns + "view", planNo);
 	}
+
+	@Override
+	public List<TravelDto> getTravelInfo(int planNo) {
+		return session.selectList(ns + "getTravelInfo", planNo);
+	}
 	
 	
 }	
