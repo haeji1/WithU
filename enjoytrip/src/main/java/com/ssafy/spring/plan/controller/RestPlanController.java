@@ -105,16 +105,20 @@ public class RestPlanController {
 		return res;
 	}
 	
-	@GetMapping("/view")
+	@GetMapping("/plan-view")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> PlanView(int articleNo){
+	public ResponseEntity<Map<String, Object>> PlanView(int planNo){
 		Map<String, Object> map = new HashMap<>();
 		try {
 //			service.updateHit(articleNo);
-			PlanDto res = service.view(articleNo);
+			System.out.println(planNo);
+			PlanDto res = service.view(planNo);
+			System.out.println(res);
 //			List<CommentDto> comment = service.getComment(articleNo);
+			System.out.println(res);
+			List<TravelDto> travel = service.getTravelInfo(planNo);
 			map.put("resmsg", "출력 성공");
-//			map.put("rescomment", comment);
+			map.put("restravel", travel);
 			map.put("resdata", res);
 		} catch (Exception e) {
 			e.printStackTrace();

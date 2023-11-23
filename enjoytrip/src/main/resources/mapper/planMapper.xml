@@ -33,9 +33,15 @@
 		registerTime
 		FROM plan;
 	</select>
-	<select id="view" parameterType="string" resultType="plandto">
+	<select id="view" parameterType="int" resultType="plandto">
 		select *
 		from plan
+		where planNo = #{planNo}
+	</select>
+	<select id="getTravelInfo" parameterType="int"
+		resultType="traveldto">
+		select *
+		from travel
 		where planNo = #{planNo}
 	</select>
 </mapper>

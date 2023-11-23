@@ -11,4 +11,5 @@ public interface PlanRepository {
 	public int getPlanNo();	
 	public List<PlanDto> list();
 	public PlanDto view(int planNo);
+	public List<TravelDto> getTravelInfo(int planNo);
 }
