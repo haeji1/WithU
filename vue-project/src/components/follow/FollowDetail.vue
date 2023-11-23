@@ -17,7 +17,7 @@ const articles = ref([]);
 
 const getArticles = () => {
   axios
-    .get(`http://192.168.205.83:8080/spring/resboard/followdetail/${route.params.followId}`)
+    .get(`http://localhost/spring/resboard/followdetail/${route.params.followId}`)
     .then(({ data }) => {
       console.log(data);
       articles.value = data.resdata;
