@@ -109,7 +109,13 @@ onMounted(() => {
                   ><router-link to="/map">지역별여행지</router-link></a
                 >
               </li>
-              <li class="nav-item dropdown">
+              <li class="nav-item">
+                <!-- <router-link to="/map"> 지역별여행지 </router-link> -->
+                <a class="nav-link active" aria-current="page"
+                  > <router-link to="/board">Q&A</router-link></a
+                >
+              </li>
+              <!-- <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -123,12 +129,11 @@ onMounted(() => {
                   <li>
                     <a class="dropdown-item"> <router-link to="/notice">공지사항</router-link></a>
                   </li>
-                  <!-- <li><a class="dropdown-item">게시판</a></li> -->
                   <li>
                     <a class="dropdown-item"> <router-link to="/board">게시판</router-link></a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page"
                   ><router-link to="/plan/plan-list">여행계획</router-link></a

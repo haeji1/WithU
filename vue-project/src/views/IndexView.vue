@@ -11,7 +11,7 @@ import NoticeSite from "../components/mainsite/NoticeSite.vue";
   <div>
     <!-- <head></head> -->
     <Top></Top>
-    <NoticeSite></NoticeSite>
+    <!-- <NoticeSite></NoticeSite> -->
     <LocationSite></LocationSite>
     <MyItinerary></MyItinerary>
     <PopularPost></PopularPost>

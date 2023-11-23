@@ -35,10 +35,10 @@
           <div class="photetop carousel-item active">
             <img src="../../img/city/berlin.jpg" class="phote d-block w-100" />
             <div class="carousel-caption d-none d-md-block">
-              <h5>First slide label</h5>
-              <p>
-                Some representative placeholder content for the first slide.
-              </p>
+              <h5>Trip with me, Trip with us</h5>
+              <strong>
+                모두 다함께 여행을 떠나보아요
+              </strong>
             </div>
           </div>
           <div class="photetop carousel-item">
@@ -48,9 +48,9 @@
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Second slide label</h5>
+              <h5>고민은 다함께</h5>
               <p>
-                Some representative placeholder content for the second slide.
+                Q&A 게시판을 활용하여 고민을 나누어 보아요.
               </p>
             </div>
           </div>
@@ -61,9 +61,9 @@
               alt="..."
             />
             <div class="carousel-caption d-none d-md-block">
-              <h5>Third slide label</h5>
+              <h5>나만 알기 싫은 여행 정보는..?!</h5>
               <p>
-                Some representative placeholder content for the third slide.
+                여행계획 게시판을 활용해서 정보를 나누어 보아요!
               </p>
             </div>
           </div>
