@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,6 +83,44 @@ public class RestPlanController {
 			map.put("resdata", e.getMessage());
 		}
 		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+	
+	@GetMapping("/plan-list")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> PlanList() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<PlanDto> res = service.list();
+			map.put("resmsg", "입력 성공");
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "입력실패");
+			map.put("resdata", e.getMessage());
+		}
+		
+		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
+		return res;
+	}
+	
+	@GetMapping("/view")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> PlanView(int articleNo){
+		Map<String, Object> map = new HashMap<>();
+		try {
+//			service.updateHit(articleNo);
+			PlanDto res = service.view(articleNo);
+//			List<CommentDto> comment = service.getComment(articleNo);
+			map.put("resmsg", "출력 성공");
+//			map.put("rescomment", comment);
+			map.put("resdata", res);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("resmsg", "출력 실패");
+			map.put("resdata", e.getMessage());
+		}
 		ResponseEntity<Map<String,Object>> res = new ResponseEntity(map,HttpStatus.OK);
 		return res;
 	}

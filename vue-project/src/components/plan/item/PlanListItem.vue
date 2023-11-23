@@ -1,22 +1,29 @@
 <!-- <script setup>
 import { onMounted } from "vue";
-const props = defineProps({ plan: Object });
+// import BoardDetail from "../BoardDetail.vue";
+const props = defineProps({ article: Object });
 onMounted(() => {
+    // console.log("item: " + props.article.content);
+    // console.log(props.article.userId);
+    console.log(props.article.hit);
+
 });
 </script>
 
 <template>
     <tr class="text-center">
-        <th scope="row">{{ props.plan.articleNo }}</th>
+        <th scope="row">{{ props.article.planNo }}</th>
         <td class="text-center">
             <router-link :to="{
-                name: 'plan-view',
-                params: { articleno: props.plan.articleNo },
+                name: 'article-view',
+                params: { articleno: props.article.articleNo },
             }" class="article-title link-dark">
-                {{ props.plan.subject }}
+                {{ props.article.subject }}
             </router-link>
         </td>
-        <td>{{ props.plan.userId }}</td>
+        <td>{{ props.article.userId }}</td>
+        <td>{{ props.article.hit }}</td>
+        <td>{{ props.article.registerTime }}</td>
     </tr>
 </template>
 

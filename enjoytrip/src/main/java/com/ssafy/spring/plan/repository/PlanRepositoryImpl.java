@@ -1,5 +1,7 @@
 package com.ssafy.spring.plan.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +31,16 @@ public class PlanRepositoryImpl implements PlanRepository{
 	@Override
 	public int getPlanNo() {
 		return session.selectOne(ns+"getAutoInc");
+	}
+
+	@Override
+	public List<PlanDto> list() {
+		return session.selectList(ns + "list");
+	}
+
+	@Override
+	public PlanDto view(int planNo) {
+		return session.selectOne(ns + "view", planNo);
 	}
 	
 	
