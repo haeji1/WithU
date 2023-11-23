@@ -1,18 +1,19 @@
 package com.ssafy.spring.plan.dto;
 
 public class TravelDto {
-	private String travelNo;
 	private int planNo;
-	private String addressName;
+	private int travelNo;
+	private String address_name;
 	private String phone;
-	private String placeName;
-	private String placeUrl;
+	private String place_name;
+	private String place_url;
 	private String x;
 	private String y;
-	public String getTravelNo() {
+	
+	public int getTravelNo() {
 		return travelNo;
 	}
-	public void setTravelNo(String travelNo) {
+	public void setTravelNo(int travelNo) {
 		this.travelNo = travelNo;
 	}
 	public int getPlanNo() {
@@ -21,11 +22,11 @@ public class TravelDto {
 	public void setPlanNo(int planNo) {
 		this.planNo = planNo;
 	}
-	public String getAddressName() {
-		return addressName;
+	public String getAddress_name() {
+		return address_name;
 	}
-	public void setAddressName(String addressName) {
-		this.addressName = addressName;
+	public void setAddress_name(String address_name) {
+		this.address_name = address_name;
 	}
 	public String getPhone() {
 		return phone;
@@ -33,17 +34,17 @@ public class TravelDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getPlaceName() {
-		return placeName;
+	public String getPlace_name() {
+		return place_name;
 	}
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
+	public void setPlace_name(String place_name) {
+		this.place_name = place_name;
 	}
-	public String getPlaceUrl() {
-		return placeUrl;
+	public String getPlace_url() {
+		return place_url;
 	}
-	public void setPlaceUrl(String placeUrl) {
-		this.placeUrl = placeUrl;
+	public void setPlace_url(String place_url) {
+		this.place_url = place_url;
 	}
 	public String getX() {
 		return x;
@@ -59,7 +60,10 @@ public class TravelDto {
 	}
 	@Override
 	public String toString() {
-		return "TravelDto [travelNo=" + travelNo + ", planNo=" + planNo + ", addressName=" + addressName + ", phone="
-				+ phone + ", placeName=" + placeName + ", placeUrl=" + placeUrl + ", x=" + x + ", y=" + y + "]";
+		return "TravelDto [travelNo=" + travelNo + ", planNo=" + planNo + ", address_name=" + address_name + ", phone="
+				+ phone + ", place_name=" + place_name + ", place_url=" + place_url + ", x=" + x + ", y=" + y + "]";
 	}
+	
+	
+	
 }

@@ -10,8 +10,8 @@
 	</insert>
 	<insert id="travelwrite" parameterType="traveldto">
 		insert into
-		travel(planNo, addressName, phone, placeName, placeUrl, x, y)
-		values(#{planNo},# {addressName},#{phone}, #{placeName}, #{placeUrl}, #{x}, #{y})
+		travel(planNo, address_name, phone, place_name, place_url, x, y)
+		values(#{planNo}, #{address_name}, #{phone , jdbcType=VARCHAR}, #{place_name}, #{place_url}, #{x}, #{y})
 	</insert>
 	<select id="getAutoInc" resultType="int">
 		select auto_increment
