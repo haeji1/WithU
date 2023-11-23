@@ -24,7 +24,10 @@ onMounted(() => {
     <div class="col-md-4">
         <a>{{ props.article.registerTime }}</a>
     </div>
-</div>
+    <div class="col-md-4">
+        <a>{{ props.article.hit }}</a>
+    </div>
+    </div>
 
 <!-- <tr class="text-center">
                     <td class="text-center">

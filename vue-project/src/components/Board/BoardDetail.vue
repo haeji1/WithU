@@ -85,7 +85,9 @@ function onFollowUser() {
 function onDeleteArticle() {
   console.log(route.params.articleno + "번글 삭제하러 가자!!!");
   axios
-    .delete(`http://192.168.205.83:8080/spring/resboard/delete/${route.params.articleno}`)
+    .delete(
+      `http://localhost:8080/spring/resboard/delete/${route.params.articleno}`
+    )
     .then((response) => {
       console.log(`Deleted post with ID ${route.params.articleno}`);
       alert("삭제되었습니다");
@@ -98,7 +100,9 @@ function onDeleteArticle() {
 
 function getComment() {
   axios
-    .get(`http://192.168.205.83:8080/spring/resboard/clist/${route.params.articleno}`)
+    .get(
+      `http://localhost:8080/spring/resboard/clist/${route.params.articleno}`
+    )
     .then((data) => {
       comments.value = data.data.resdata;
       console.log(`${route.params.articleno}번 댓글 불러오기`);
@@ -117,12 +121,15 @@ function WriteComment() {
     router.push({ name: "login" });
   } else {
     axios
-      .post(`http://192.168.205.83:8080/spring/resboard/cwrite`, comment.value)
+      .post(`http://localhost:8080/spring/resboard/cwrite`, comment.value)
       .then(({ data }) => {
         console.log(comment.value);
         alert("댓글이 등록되었습니다.");
         router
-          .push({ name: "article-view", params: { articleno: route.params.articleno } })
+          .push({
+            name: "article-view",
+            params: { articleno: route.params.articleno },
+          })
           // router.push({ name: "article-view" });
           .then(() => {
             window.location.reload();
@@ -138,7 +145,7 @@ function WriteComment() {
 function DeleteComment(commentNo) {
   console.log(commentNo);
   axios
-    .delete(`http://192.168.205.83:8080/spring/resboard/cdelete/${commentNo}`)
+    .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
     .then((response) => {
       console.log(`Deleted post with ID ${commentNo}`);
       alert("댓글이 삭제되었습니다");
@@ -154,20 +161,26 @@ function DeleteComment(commentNo) {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <h2 class="my-3 py-3 shadow-sm bg-light text-center">
-          <mark class="sky">글보기</mark>
-        </h2>
-      </div>
-      <p>
-        <span class="fw-bold"> 조회수 : {{ articles.hit }} </span> <br />
-        <span class="text-secondary fw-light"> 작성자 : {{ articles.userId }}</span>
-      </p>
-      <div class="col-lg-10 text-start">
-        <div class="row my-2">
-          <h2 class="text-secondary px-5">
-            제목 : {{ articles.subject }}<br />
-            내용 : {{ articles.content }}
-          </h2>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              <div class="border rounded p-4">
+                <h2>{{ articles.subject }}</h2>
+                <div class="d-flex justify-content-end">
+                  <strong>작성자:</strong>
+                  <span class="text-end">{{ articles.userId }}</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <strong>작성일:</strong>
+                  <span class="text-end">{{ articles.registerTime }}</span>
+                </div>
+                <div class="d-flex justify-content-end">
+                  조회수 : {{ articles.hit }}<br />
+                </div>
+                <p>{{ articles.content }}</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="divider mt-3 mb-3"></div>
         <div class="d-flex justify-content-end">

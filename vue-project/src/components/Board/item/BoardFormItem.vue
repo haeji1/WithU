@@ -134,7 +134,8 @@ function updateArticle() {
   console.log(articles.value.articleNo + "번글 수정하자!!");
   axios
     .put(
-      `http://192.168.205.83:8080/spring/resboard/modify/${articles.value.articleNo}`,
+      // `http://192.168.205.83:8080/spring/resboard/modify/${articles.value.articleNo}`,
+      `http://localhost:8080/spring/resboard/modify/${articles.value.articleNo}`,
       article.value
     )
     .then(({ data }) => {

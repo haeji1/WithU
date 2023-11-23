@@ -30,9 +30,7 @@ CREATE TABLE `comment` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `content` varchar(1000) DEFAULT NULL,
   `commentNo` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`commentNo`),
-  KEY `articleno` (`articleno`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`articleno`) REFERENCES `board` (`articleno`)
+  PRIMARY KEY (`commentNo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
