@@ -38,6 +38,7 @@ function onFollowUser() {
       .catch((error) => {
         console.log(error);
       });
+    router.push({ name: "following" })
   }
 
 }

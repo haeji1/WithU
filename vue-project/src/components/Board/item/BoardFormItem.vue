@@ -111,7 +111,7 @@ function onSubmit() {
 }
 
 function writeArticle() {
-  if (user != null && article.value.length != 0 && article.value.content != 0) {
+  if (user != null && article.value.subject.length != 0 && article.value.content.length != 0) {
     console.log("글등록하자!!");
     article.value.userId = user;
     console.log(article.value.userId);
@@ -130,7 +130,7 @@ function writeArticle() {
     router.push({ name: "article-list" });
   }
 
-  else {
+  else if (user == null) {
     router.push({ name: "login" });
     alert("로그인하세요");
   }
