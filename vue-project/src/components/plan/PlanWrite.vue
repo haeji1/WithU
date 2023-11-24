@@ -65,19 +65,31 @@ function onSubmit() {
     } else if (!article.value.subject.trim()) {
         alert("제목을 입력하세요!");
     } else if (subjectErrMsg.value.length > 0) {
-        alert("제목이나 입력해");
+        alert("제목이나")
     } else {
         writeArticle();
     }
 }
 
-function writeArticle() {
-    if (user != null && article.value.subject.length != 0 && article.value.content.length != 0) {
+async function writeArticle() {
+    if (user !== null) {
         console.log("글등록하자!!");
         article.value.userId = user;
         console.log(article.value.userId);
-        axios
+        travellist.value = selectSpotData.value;
+        console.log(article);
+        console.log("selectSpotData.value : " + selectSpotData.value);
+        console.log("travellist.value : " + travellist.value);
+        await axios
             .post(url, article.value)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        await axios
+            .post(url2, travellist.value)
             .then((response) => {
                 console.log(response);
                 router.push({ name: "plan-list" });
@@ -85,13 +97,7 @@ function writeArticle() {
             .catch((error) => {
                 console.log(error);
             });
-    }
-    else if ((article.value.length === 0 || article.value.subject.length === 0) && user != null) {
-        alert("빈글은 올릴 수 없습니다.")
-        router.push({ name: "plan-list" });
-    }
-
-    else if (user == null) {
+    } else {
         router.push({ name: "login" });
         alert("로그인하세요");
     }
