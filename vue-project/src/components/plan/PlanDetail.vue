@@ -106,18 +106,24 @@ function moveList() {
 // }
 
 function onFollowUser() {
-    alert(`${articles.value.userId} 님을 팔로우합니다.`);
-    follow.value.userId = user;
-    follow.value.followId = articles.value.userId;
-    axios
-        .post(followurl, follow.value)
-        .then((response) => {
-            console.log(response);
-            router.push({ name: "following" });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    if (user === articles.value.userId) {
+        alert("자기자신을 팔로우 할 수 없습니다.")
+    }
+    else {
+        alert(`${articles.value.userId} 님을 팔로우합니다.`);
+        follow.value.userId = user;
+        follow.value.followId = articles.value.userId;
+        axios
+            .post(followurl, follow.value)
+            .then((response) => {
+                console.log(response);
+                router.push({ name: "following" });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 }
 
 // function onDeleteArticle() {

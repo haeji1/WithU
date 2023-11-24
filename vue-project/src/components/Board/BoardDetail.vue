@@ -88,7 +88,7 @@ function onDeleteArticle(userId) {
   } else {
     console.log(route.params.articleno + "번글 삭제하러 가자!!!");
     axios
-      .delete(`http://localhost:8080/spring/resboard/delete/${route.params.articleno}`)
+      .delete(`http://192.168.205.82:8080/spring/resboard/delete/${route.params.articleno}`)
       .then((response) => {
         console.log(`Deleted post with ID ${route.params.articleno}`);
         alert("삭제되었습니다");
@@ -102,7 +102,7 @@ function onDeleteArticle(userId) {
 function getComment() {
   axios
     .get(
-      `http://localhost:8080/spring/resboard/clist/${route.params.articleno}`
+      `http://192.168.205.82:8080/spring/resboard/clist/${route.params.articleno}`
     )
     .then((data) => {
       comments.value = data.data.resdata;
@@ -122,7 +122,7 @@ function WriteComment() {
     router.push({ name: "login" });
   } else {
     axios
-      .post(`http://localhost:8080/spring/resboard/cwrite`, comment.value)
+      .post(`http://192.168.205.82:8080/spring/resboard/cwrite`, comment.value)
       .then(({ data }) => {
         console.log(comment.value);
         alert("댓글이 등록되었습니다.");
@@ -148,7 +148,7 @@ function DeleteComment(commentNo, commentUser) {
   if (user === commentUser) {
     axios
       // .delete(http://192.168.205.83:8080/spring/resboard/cdelete/${commentNo})
-      .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
+      .delete(`http://192.168.205.82:8080/spring/resboard/cdelete/${commentNo}`)
       .then((response) => {
         console.log(`Deleted post with ID ${commentNo}`);
         alert("댓글이 삭제되었습니다");

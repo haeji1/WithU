@@ -22,18 +22,24 @@ const follow = ref({
 });
 
 function onFollowUser() {
-  alert(`${props.follower.userId} 님을 팔로우합니다.`);
-  follow.value.userId = user;
-  follow.value.followId = props.follower.userId;
-  console.log(follow.value.length);
-  axios
-    .post(followurl, follow.value)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  if (user === props.follower.userId) {
+    alert("자기자신을 팔로우 할 수 없습니다")
+  }
+  else {
+    alert(`${props.follower.userId} 님을 팔로우합니다.`);
+    follow.value.userId = user;
+    follow.value.followId = props.follower.userId;
+    console.log(follow.value.length);
+    axios
+      .post(followurl, follow.value)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 }
 </script>
 
@@ -41,14 +47,8 @@ function onFollowUser() {
   <div class="mb-3 d-flex justify-content-center">
     <div class="card w-50">
       <div class="card-body" style="text-align: center">
-        <img
-          src="@/assets/profile.png"
-          alt="로고"
-          width="150"
-          height="150"
-          class="d-inline-block align-top"
-          style="border-radius: 50%"
-        />
+        <img src="@/assets/profile.png" alt="로고" width="150" height="150" class="d-inline-block align-top"
+          style="border-radius: 50%" />
         <h5 class="card-title">{{ props.follower.userId }}</h5>
         <p class="card-text"></p>
         <button class="btn btn-pink" @click="onFollowUser">팔로우하기</button>
@@ -67,11 +67,13 @@ a {
   width: 300px;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s; /* 마우스 호버 시 부드러운 효과를 위한 CSS 속성 추가 */
+  transition: transform 0.3s;
+  /* 마우스 호버 시 부드러운 효과를 위한 CSS 속성 추가 */
 }
 
 .card:hover {
-  transform: scale(1.05); /* 마우스 호버 시 크기를 약간 확대하는 효과 */
+  transform: scale(1.05);
+  /* 마우스 호버 시 크기를 약간 확대하는 효과 */
 }
 
 .card-body {
@@ -92,7 +94,8 @@ a {
   background-color: #ff69b4;
   color: #fff;
   border: none;
-  transition: background-color 0.3s; /* 마우스 호버 시 부드러운 색상 전환을 위한 효과 */
+  transition: background-color 0.3s;
+  /* 마우스 호버 시 부드러운 색상 전환을 위한 효과 */
 }
 
 .btn-pink:hover {
