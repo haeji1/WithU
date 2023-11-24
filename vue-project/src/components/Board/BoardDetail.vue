@@ -82,22 +82,23 @@ function onFollowUser() {
   }
 }
 
-function onDeleteArticle() {
-  console.log(route.params.articleno + "번글 삭제하러 가자!!!");
-  axios
-    .delete(
-      `http://localhost:8080/spring/resboard/delete/${route.params.articleno}`
-    )
-    .then((response) => {
-      console.log(`Deleted post with ID ${route.params.articleno}`);
-      alert("삭제되었습니다");
-      router.push({ name: "article-list" });
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+function onDeleteArticle(userId) {
+  if (user !== userId) {
+    alert("자기 자신의 글만 삭제할 수 있습니다.");
+  } else {
+    console.log(route.params.articleno + "번글 삭제하러 가자!!!");
+    axios
+      .delete(`http://localhost:8080/spring/resboard/delete/${route.params.articleno}`)
+      .then((response) => {
+        console.log(`Deleted post with ID ${route.params.articleno}`);
+        alert("삭제되었습니다");
+        router.push({ name: "article-list" });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
-
 function getComment() {
   axios
     .get(
@@ -142,18 +143,23 @@ function WriteComment() {
   }
 }
 
-function DeleteComment(commentNo) {
+function DeleteComment(commentNo, commentUser) {
   console.log(commentNo);
-  axios
-    .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
-    .then((response) => {
-      console.log(`Deleted post with ID ${commentNo}`);
-      alert("댓글이 삭제되었습니다");
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  if (user === commentUser) {
+    axios
+      // .delete(http://192.168.205.83:8080/spring/resboard/cdelete/${commentNo})
+      .delete(`http://localhost:8080/spring/resboard/cdelete/${commentNo}`)
+      .then((response) => {
+        console.log(`Deleted post with ID ${commentNo}`);
+        alert("댓글이 삭제되었습니다");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    alert("자신의 댓글만 삭제할 수 있습니다.");
+  }
 }
 </script>
 
@@ -190,7 +196,7 @@ function DeleteComment(commentNo) {
           <button type="button" class="btn btn-outline-success mb-3 ms-1" @click="moveModify">
             글수정
           </button>
-          <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeleteArticle">
+          <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="() => onDeleteArticle(articles.userId)">
             글삭제
           </button>
           <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onFollowUser">
@@ -212,7 +218,7 @@ function DeleteComment(commentNo) {
       <h5 class="card-header">{{ comment.userId }}</h5>
       <div class="card-body">
         <h5 class="card-title">{{ comment.content }}</h5>
-        <a class="btn btn-primary" @click="() => DeleteComment(comment.commentNo)">댓글 삭제</a>
+        <a class="btn btn-primary" @click="() => DeleteComment(comment.commentNo, comment.userId)">댓글 삭제</a>
       </div>
     </div>
   </div>
