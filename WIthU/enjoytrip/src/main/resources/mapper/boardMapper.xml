@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper	namespace="com.ssafy.spring.board.repository.BoardRepository">
+	<select id="list" resultType="boarddto">
+		SELECT articleno, subject, userId, hit, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
+    	FROM board
+    	order by registerTime desc;
+	</select>
+	<insert id="write" parameterType="boarddto">
+		insert into board(userId, subject, content, registerTime)
+		values(#{userId}, #{subject}, #{content}, now())
+	</insert>
+	<select id="view" parameterType="string" resultType="boarddto">
+		select *
+		from board
+		where articleno = #{articleNo}
+	</select>
+	<select id="getComment" parameterType="string"
+		resultType="comdto">
+		select *
+		from comment
+		where articleno = #{articleNo}
+	</select>
+	<select id="insertComment" parameterType="comdto">
+		insert into
+		comment(articleNo, userId, date, content)
+		values(#{articleNo},
+		#{userId},now(), #{content})
+	</select>
+	<delete id="deleteComment" parameterType="string">
+		delete from comment
+		where commentNo = #{commentno}
+	</delete>
+	<delete id="delete">
+		delete from board
+		where articleno = #{articleNo};
+	</delete>
+	<update id ="modify" parameterType = "boarddto">
+		update board set subject = #{subject}, content = #{content}
+		where articleno = #{articleNo}
+	</update>
+	<select id= "followingboard" parameterType="String" resultType="boarddto">
+		select *
+		from board
+		where userId = #{followId}
+	</select>
+		<update id ="updateHit" parameterType = "string">
+		update board set hit = hit + 1
+		where articleno = #{articleNo}
+	</update>
+		<select id="listpop" resultType="boarddto">
+		SELECT articleno, subject, userId, hit, DATE_FORMAT(registerTime, '%Y-%m-%d') as registerTime
+    	FROM board
+    	order by hit desc, registerTime desc
+    	limit 3
+	</select>
+</mapper>
