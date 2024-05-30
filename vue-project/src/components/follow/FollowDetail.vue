@@ -17,7 +17,8 @@ const articles = ref([]);
 
 const getArticles = () => {
   axios
-    .get(`http://192.168.205.83:8080/spring/resboard/followdetail/${route.params.followId}`)
+    // .get(`http://localhost:8080/spring/resboard/followdetail/${route.params.followId}`)
+    .get(`http://192.168.205.82:8080/spring/resboard/followdetail/${route.params.followId}`)
     .then(({ data }) => {
       console.log(data);
       articles.value = data.resdata;
@@ -55,10 +56,10 @@ const getArticles = () => {
       </table>
     </div>
     <!-- <PageNavigation
-          :current-page="currentPage"
-          :total-page="totalPage"
-          @pageChange="onPageChange"
-        ></PageNavigation> -->
+                              :current-page="currentPage"
+                              :total-page="totalPage"
+                              @pageChange="onPageChange"
+                            ></PageNavigation> -->
   </div>
 </template>
 

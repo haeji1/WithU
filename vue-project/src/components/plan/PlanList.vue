@@ -62,15 +62,15 @@ const moveWrite = () => {
                             글쓰기
                         </button>
                     </div>
-                    <div class="col-md-5 offset-5">
-                        <form class="d-flex">
-                            <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" v-model="param.word" placeholder="검색어..." />
-                                <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
-                            </div>
-                        </form>
-                    </div>
+                    <!-- <div class="col-md-5 offset-5">
+                                                                                                                            <form class="d-flex">
+                                                                                                                                <VSelect :selectOption="selectOption" @onKeySelect="changeKey" />
+                                                                                                                                <div class="input-group input-group-sm">
+                                                                                                                                    <input type="text" class="form-control" v-model="param.word" placeholder="검색어..." />
+                                                                                                                                    <button class="btn btn-dark" type="button" @click="getArticleList">검색</button>
+                                                                                                                                </div>
+                                                                                                                            </form>
+                                                                                                                        </div> -->
                 </div>
                 <table class="table table-hover">
                     <thead>
@@ -84,8 +84,8 @@ const moveWrite = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center" v-for="article in articles">
-                            <th scope="row">{{ article.planNo }}</th>
+                        <tr class="text-center" v-for="article in articles.slice().reverse().slice(0, articles.length - 1)">
+                            <th scope="row">{{ article.planNo - 1 }}</th>
                             <td class="text-center">
                                 <router-link :to="{
                                     name: 'plan-view',
@@ -103,10 +103,10 @@ const moveWrite = () => {
                 </table>
             </div>
             <!-- <PageNavigation
-                                                                                                                                                                                                                                                                                :current-page="currentPage"
-                                                                                                                                                                                                                                                                                :total-page="totalPage"
-                                                                                                                                                                                                                                                                                @pageChange="onPageChange"
-                                                                                                                                                                                                                                                                                ></PageNavigation> -->
+                                                                                                                                                                                                                                                                                                                                                                                    :current-page="currentPage"
+                                                                                                                                                                                                                                                                                                                                                                                    :total-page="totalPage"
+                                                                                                                                                                                                                                                                                                                                                                                    @pageChange="onPageChange"
+                                                                                                                                                                                                                                                                                                                                                                                    ></PageNavigation> -->
         </div>
     </div>
 </template>

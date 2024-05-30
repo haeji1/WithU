@@ -98,7 +98,7 @@ const addKakaoMapScript = () => {
       <a :href="site.place_url" target="_blank">
         <!-- <img v-bind:src="site.image" class="card-img-top" alt="Image 1" /> -->
         <div class="card-body">
-          <h5 class="card-title">{{ site.place_name }}</h5>
+          <h5 class="card-title text-center">{{ site.place_name }}</h5>
           <!-- <p class="card-text">{{ site.address_name }}</p> -->
         </div>
       </a>
@@ -109,5 +109,8 @@ const addKakaoMapScript = () => {
 <style scoped>
 #map {
   height: 0px;
+}
+.card-body{
+  color: #222222;
 }
 </style>

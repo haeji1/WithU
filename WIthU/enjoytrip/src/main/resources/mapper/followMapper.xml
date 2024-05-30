@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.spring.follow.repository.FollowRepository">
+		<select id="followerlist" parameterType="String" resultType="followdto">
+			select userId, followId
+			from follow
+			where followId = #{followId}
+		</select>
+		
+		<select id="followlist" parameterType="String" resultType="followdto">
+			select userId, followId
+			from follow
+			where userId = #{userId}
+		</select>
+		
+		<insert id="follow" parameterType="followdto">
+			insert into follow(userId, followId)
+			values(#{userId}, #{followId})
+		</insert>
+		
+		<select id="followingboard" parameterType="String" resultType="boarddto">
+			select subject, b.userId
+			from board b join follow f
+			on b.userId = f.followId
+			where followId = #{followId};
+		</select>
+</mapper>

@@ -111,7 +111,7 @@ function onSubmit() {
 }
 
 function writeArticle() {
-  if (user !== null) {
+  if (user != null && article.value.subject.length != 0 && article.value.content.length != 0) {
     console.log("글등록하자!!");
     article.value.userId = user;
     console.log(article.value.userId);
@@ -124,7 +124,13 @@ function writeArticle() {
       .catch((error) => {
         console.log(error);
       });
-  } else {
+  }
+  else if ((article.value.length === 0 || article.value.subject.length === 0) && user != null) {
+    alert("빈글은 올릴 수 없습니다.")
+    router.push({ name: "article-list" });
+  }
+
+  else if (user == null) {
     router.push({ name: "login" });
     alert("로그인하세요");
   }
@@ -134,7 +140,8 @@ function updateArticle() {
   console.log(articles.value.articleNo + "번글 수정하자!!");
   axios
     .put(
-      `http://192.168.205.83:8080/spring/resboard/modify/${articles.value.articleNo}`,
+      // `http://192.168.205.83:8080/spring/resboard/modify/${articles.value.articleNo}`,
+      `http://192.168.205.82:8080/spring/resboard/modify/${articles.value.articleNo}`,
       article.value
     )
     .then(({ data }) => {

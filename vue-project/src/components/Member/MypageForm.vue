@@ -24,7 +24,8 @@ const member = ref({
 
 const getMember = () => {
   axios
-    .get(`http://192.168.205.83:8080/spring/resmem/mypage/${user}`)
+    // .get(`http://localhost:8080/spring/resmem/mypage/${user}`)
+    .get(`http://192.168.205.82:8080/spring/resmem/mypage/${user}`)
     .then(({ data }) => {
       member.value = data.resdata;
       console.log(member.value);
