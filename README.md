@@ -1,4 +1,3 @@
-![logo3](/uploads/48d8c7d7a4acbc36c49c0e14d11fb503/logo3.png)
 
 # WithU
 여행 계획 게시판 사이트
